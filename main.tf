@@ -8,3 +8,10 @@ module "vpc" {
   private_subnet_cidrs = var.private_subnet_cidrs
   availability_zones   = var.availability_zones
 }
+
+
+module "iam" {
+  source       = "./modules/security/iam"
+  project_name = var.project_name
+  common_tags  = var.common_tags
+}
