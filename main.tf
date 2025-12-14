@@ -1,3 +1,4 @@
+
 module "vpc" {
   source = "./modules/network/vpc"
   project_name         = var.project_name
@@ -15,6 +16,18 @@ module "iam" {
   project_name = var.project_name
   common_tags  = var.common_tags
 }
+
+module "acm" {
+  source = "./modules/security/acm"
+  domain_name = var.zone_name
+  subject_alternative_names = ["www.${var.zone_name}"]
+  zone_id = module.route53.zone_id
+  tags = {
+    Client = "spakcommgroup"
+    Env    = "dev"
+  }
+}
+
 
 module "route53" {
   source = "./modules/network/route53"
