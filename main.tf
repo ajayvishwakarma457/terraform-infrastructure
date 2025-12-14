@@ -42,7 +42,7 @@ module "route53" {
       name    = "www"
       type    = "A"
       ttl     = 300
-      records = [module.ec2.public_ip] # [aws_instance.web.public_ip]
+      records = [module.ec2.public_ip] # [aws_instance.web.public_ip] 
     }
   ]
 
@@ -111,6 +111,19 @@ module "s3_app" {
       expiration_days  = 365
     }
   ]
+  tags = {
+    Client = "spakcommgroup"
+    Env    = "dev"
+  }
+}
+
+module "lightsail_web" {
+  source = "./modules/compute/lightsail"
+
+  name              = "web-dev"
+  availability_zone = "ap-south-1a"
+  bundle_id         = "nano_3_1"
+
   tags = {
     Client = "spakcommgroup"
     Env    = "dev"
