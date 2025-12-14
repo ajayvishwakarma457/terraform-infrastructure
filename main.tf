@@ -10,7 +10,6 @@ module "vpc" {
   availability_zones   = var.availability_zones
 }
 
-
 module "iam" {
   source       = "./modules/security/iam"
   project_name = var.project_name
@@ -27,7 +26,6 @@ module "acm" {
     Env    = "dev"
   }
 }
-
 
 module "route53" {
   source      = "./modules/network/route53"
@@ -87,7 +85,6 @@ module "web_sg" {
   }
 }
 
-
 module "ec2" {
   source             = "./modules/compute/ec2"
   name               = "web-dev"
@@ -101,3 +98,22 @@ module "ec2" {
     Env    = "dev"
   }
 }
+
+module "s3_app" {
+  source = "./modules/storage/s3"
+  bucket_name = "spakcommgroup-app-dev"
+  force_destroy = false
+  lifecycle_rules = [
+    {
+      id               = "logs-archive"
+      enabled          = true
+      transitions      = [{ days = 30, storage_class = "STANDARD_IA" }]
+      expiration_days  = 365
+    }
+  ]
+  tags = {
+    Client = "spakcommgroup"
+    Env    = "dev"
+  }
+}
+
