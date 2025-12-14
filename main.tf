@@ -15,3 +15,22 @@ module "iam" {
   project_name = var.project_name
   common_tags  = var.common_tags
 }
+
+module "route53" {
+  source = "./modules/network/route53"
+  zone_name  = var.zone_name
+  create_zone = true
+  records = [
+    {
+      name    = "www"
+      type    = "A"
+      ttl     = 300
+      records = ["1.2.3.4"] # [aws_instance.web.public_ip]
+    }
+  ]
+
+  tags = {
+    Client = "client-a"
+    Env    = "dev"
+  }
+}

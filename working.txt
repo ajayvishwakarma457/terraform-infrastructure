@@ -12,3 +12,7 @@
 
 4. Test in the browser
     http://<EC2_PUBLIC_IP>
+
+
+
+spakcommgroup.com
