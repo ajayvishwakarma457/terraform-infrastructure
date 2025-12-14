@@ -1,0 +1,22 @@
+terraform init   
+terraform init -upgrade
+terraform apply
+terraform fmt  
+terraform validate
+terraform plan -out=tfplan
+terraform apply tfplan
+terraform output rds_endpoint
+terraform plan -lock=false
+terraform apply -auto-approve
+terraform state list
+terraform force-unlock <ID>
+terraform output
+terraform refresh
+terraform destroy -target=module.cloudfront
+terraform apply -target=module.cloudfront
+terraform state rm module.cloudfront
+terraform state list | grep cloudfront
+
+rm -rf .terraform
+rm .terraform.lock.hcl
+terraform init -reconfigure

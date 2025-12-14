@@ -1,0 +1,124 @@
+
+Root Structure (What You Have)
+    envs/
+    modules/
+    notes/
+    .gitignore
+    backend.md
+    backend.tf
+    main.tf
+    outputs.tf
+    provider.tf
+    README.md
+    variables.tf
+    versions.tf
+
+
+What each file/folder is normally used for
+
+    1. envs/
+        Separate environment configs
+            Example: dev, stage, prod Terraform workspaces
+        
+        Usually contains .tfvars files
+            dev.tfvars
+            prod.tfvars
+
+    2. modules/
+        Your reusable modules
+            Example folders:
+                vpc/
+                ecs/
+                rds/
+                apprunner/
+        Good modular design.
+
+
+    3. notes/
+        Anything non-Terraform: docs, diagrams, reference notes.
+
+    4. backend.tf
+        Stores remote backend config (S3, DynamoDB for locking)
+        Loads before anything else.
+
+    5. provider.tf
+        AWS provider setup
+            region
+            default tags
+            profiles (optional)
+
+    6. versions.tf
+        Terraform version lock
+        Provider version constraints
+            Example:
+                terraform {
+                    required_version = ">= 1.8.0"
+                    required_providers {
+                        aws = {
+                        source  = "hashicorp/aws"
+                        version = "~> 5.0"
+                        }
+                    }
+                }
+
+    7. variables.tf
+        All input variables with defaults / descriptions.
+
+    8. main.tf
+        Core resources or module calls (In production, this usually only calls modules)
+
+    9. outputs.tf
+        Anything you want to print after apply
+        Example: VPC ID, ALB DNS, ECS service URL.
+
+    10. README.md
+        Describes the project, setup, and usage steps.
+
+    11. backend.md
+        Documentation for backend configuration (just reference).
+
+
+
+12 .Final Summary (Exact Order)
+
+    1. Backend config          (before loading state)
+    2. Terraform + Provider    (version + provider plugins)
+    3. Variables               (definitions)
+    4. Data sources            (external lookups)
+    5. Resources + Modules     (in dependency order, not file order)
+    6. Outputs                 (after apply)
+
+
+13. Terraform reads all .tf files (no order).
+
+    Terraform scans the folder and collects:
+        backend blocks
+        providers
+        variables
+        resources
+        outputs
+    It does not care about filenames.
+
+
+
+13. Before doing ANYTHING, Terraform processes the backend block FIRST.
+
+    Because Terraform must know:
+        where the state file lives
+        how to lock the state
+        whether to use S3, local, etc.
+    So the backend block (usually in backend.tf) is handled before all other blocks.
+    If backend fails → Terraform stops completely.
+
+
+14. After backend is initialized, Terraform processes everything else together.
+
+    Order does not matter.
+        provider.tf
+        versions.tf
+        variables.tf
+        main.tf
+        outputs.tf
+        modules/*
+    Terraform merges them into one configuration.
+

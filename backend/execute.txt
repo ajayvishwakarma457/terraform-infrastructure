@@ -1,0 +1,26 @@
+How to use this structure (correct workflow)
+
+    STEP 1 — Create backend (S3 + DynamoDB)
+        Go into the backend folder: 
+            cd backend
+            terraform init
+            terraform apply
+
+        This creates:
+            tanvora-terraform-state-001
+            tanvora-terraform-lock
+        You only run this ONCE.
+
+
+
+    STEP 2 — Use backend in main project
+        Go to root folder:
+            cd ..
+            terraform init -reconfigure
+        Terraform will connect to S3 backend.
+        Then:
+            terraform plan
+            terraform apply
+
+
+
