@@ -1,0 +1,33 @@
+1) SSH into EC2
+    ssh -i your-key.pem ec2-user@3.109.49.24
+
+2) Install web server
+    sudo apt update
+    sudo apt install -y nginx
+    sudo systemctl start nginx
+    sudo systemctl enable nginx
+
+3) Install Certbot (Let’s Encrypt client)
+    sudo apt install -y certbot python3-certbot-nginx
+
+4) Issue SSL certificate    
+    sudo certbot --nginx -d spakcommgroup.com -d www.spakcommgroup.com
+
+5) During prompts:
+    Email → enter
+    Agree → Y
+    Redirect HTTP → Yes (recommended)
+
+6) Certbot will:
+    Prove domain ownership
+    Install cert
+    Update Nginx config
+    Enable HTTPS
+    Add HTTP → HTTPS redirect
+
+7) Open HTTPS in browser
+    Now test:
+        https://www.spakcommgroup.com
+        https://spakcommgroup.com
+
+
