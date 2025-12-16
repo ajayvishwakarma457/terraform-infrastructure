@@ -1,61 +1,68 @@
-# Local .terraform directories
-**/.terraform/*
+####################################
+# Terraform (global under all-in-one/)
+####################################
+
+# Terraform working directories
+all-in-one/**/.terraform/
+all-in-one/.terraform/
 
 # Terraform state files
-*.tfstate
-*.tfstate.*
+all-in-one/**/*.tfstate
+all-in-one/**/*.tfstate.*
 
-# Crash logs
-crash.log
-crash.*.log
+# Terraform plan files
+all-in-one/**/*.tfplan
 
-# Ignore override files as they are usually for local use
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
+# Terraform crash logs
+all-in-one/**/crash.log
+all-in-one/**/crash.*.log
 
-# Ignore CLI configuration files
-.terraformrc
-terraform.rc
+# Override files (local-only)
+all-in-one/**/override.tf
+all-in-one/**/override.tf.json
+all-in-one/**/*_override.tf
+all-in-one/**/*_override.tf.json
+
+# Terraform CLI config
+all-in-one/**/.terraformrc
+all-in-one/**/terraform.rc
 
 # Sensitive variable files
-*.tfvars
-*.tfvars.json
+all-in-one/**/*.tfvars
+all-in-one/**/*.tfvars.json
 
-# Ignore environment-specific files
-*.tfplan
-*.backup
-*.bak
+# Backup files
+all-in-one/**/*.backup
+all-in-one/**/*.bak
 
-# Local IDE or OS files
+
+####################################
+# Backend-specific (still important)
+####################################
+
+all-in-one/backend/.terraform/
+all-in-one/backend/terraform.tfstate
+all-in-one/backend/terraform.tfstate.*
+all-in-one/backend/*.tfplan
+all-in-one/backend/*.backup
+all-in-one/backend/*.bak
+
+
+####################################
+# IDE / OS junk
+####################################
+
 # macOS
 .DS_Store
 
 # Windows
 Thumbs.db
 
-# VSCode
+# VS Code
 .vscode/
 
-# IntelliJ
+# IntelliJ / JetBrains
 .idea/
 
 # Logs
 *.log
-
-# Terraform lock file (optional)
-# Uncomment if you do not want to track dependency lock file
-# .terraform.lock.hcl
-
-
-
-# Backend Terraform project (very important)
-# -----------------------------------
-backend/.terraform/
-# backend/.terraform.lock.hcl
-backend/terraform.tfstate
-backend/terraform.tfstate.*
-backend/*.tfplan
-backend/*.backup
-backend/*.bak
