@@ -1,0 +1,38 @@
+1) SSH into Lightsail instance:
+    ssh ec2-user@13.204.180.216
+
+2) Install nginx (Amazon Linux 2):
+    sudo amazon-linux-extras install nginx1 -y
+
+3) Start nginx:
+    sudo systemctl start nginx
+    sudo systemctl enable nginx
+
+4) Verify:
+    systemctl status nginx
+
+5) You must see:
+    Active: active (running)
+
+6) Open browser:
+    http://13.204.180.216
+
+
+7) Minimal correct path (what you should do next)
+    Add 443 to Lightsail firewall
+    Point domain → Lightsail static IP (Route53 already done)
+    Install certbot and issue cert:
+
+        amazon-linux-extras install epel -y
+        yum install certbot python2-certbot-nginx -y
+        certbot --nginx -d yourdomain.com -d www.yourdomain.com
+
+
+
+
+
+
+
+
+
+    certbot --nginx -d spakcommgroup.com -d www.spakcommgroup.com
