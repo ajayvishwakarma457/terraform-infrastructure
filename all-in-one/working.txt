@@ -1,0 +1,2 @@
+terraform destroy -target=module.lightsail_web
+terraform apply -target=module.lightsail_web

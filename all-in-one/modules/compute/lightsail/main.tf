@@ -6,16 +6,45 @@ resource "aws_lightsail_instance" "this" {
   bundle_id         = var.bundle_id
   key_pair_name     = var.key_pair_name
   user_data         = var.user_data
-  tags = var.tags
+  tags              = var.tags
 }
 
 resource "aws_lightsail_static_ip" "this" {
   name = "${var.name}-ip"
 }
 
+resource "aws_lightsail_instance_public_ports" "this" {
+  instance_name = aws_lightsail_instance.this.name
+
+  port_info {
+    protocol  = "tcp"
+    from_port = 443
+    to_port   = 443
+  }
+
+  port_info {
+    protocol  = "tcp"
+    from_port = 3000
+    to_port   = 3000
+  }
+
+  port_info {
+    protocol  = "tcp"
+    from_port = 3100
+    to_port   = 3100
+  }
+
+  port_info {
+    protocol  = "tcp"
+    from_port = 22
+    to_port   = 22
+  }
+
+}
+
 resource "aws_lightsail_static_ip_attachment" "this" {
   static_ip_name = aws_lightsail_static_ip.this.name
-  instance_name = aws_lightsail_instance.this.name
+  instance_name  = aws_lightsail_instance.this.name
 }
 
 # Create snapshot using AWS CLI
@@ -51,3 +80,18 @@ resource "null_resource" "lightsail_snapshot" {
 
   depends_on = [aws_lightsail_instance.this]
 }
+
+resource "aws_lightsail_disk" "this" {
+  name              = "${var.name}-disk-1"
+  availability_zone = var.availability_zone
+  size_in_gb        = var.disk_size_gb
+  tags              = var.tags
+}
+
+resource "aws_lightsail_disk_attachment" "this" {
+  disk_name     = aws_lightsail_disk.this.name
+  instance_name = aws_lightsail_instance.this.name
+  disk_path     = "/dev/xvdf"
+}
+
+

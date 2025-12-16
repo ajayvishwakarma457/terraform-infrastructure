@@ -41,3 +41,9 @@ variable "create_snapshot" {
   type        = bool
   default     = false
 }
+
+variable "disk_size_gb" {
+  type        = number
+  description = "Size of Lightsail instance disk in GB"
+  default     = 20
+}

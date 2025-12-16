@@ -124,6 +124,7 @@ module "lightsail_web" {
   availability_zone = "ap-south-1a"
   bundle_id         = "nano_3_1"
   create_snapshot   = true 
+  disk_size_gb = 50
 
   tags = {
     Client = "spakcommgroup"
