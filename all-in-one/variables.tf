@@ -65,7 +65,7 @@ variable "alert_email" {
 #   sensitive   = true
 # }
 
-variable "zone_name" {
+variable "domain_name" {
   description = "Route53 hosted zone name"
   type        = string
   default = "spakcommgroup.com"

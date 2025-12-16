@@ -18,8 +18,8 @@ module "iam" {
 
 module "acm" {
   source                    = "./modules/security/acm"
-  domain_name               = var.zone_name
-  subject_alternative_names = ["www.${var.zone_name}"]
+  domain_name               = var.domain_name
+  subject_alternative_names = ["www.${var.domain_name}"]
   zone_id                   = module.route53.zone_id
   tags = {
     Client = "spakcommgroup"
@@ -29,7 +29,7 @@ module "acm" {
 
 module "route53" {
   source      = "./modules/network/route53"
-  zone_name   = var.zone_name
+  zone_name   = var.domain_name
   create_zone = true
   records = [
     {
@@ -120,11 +120,17 @@ module "s3_app" {
 module "lightsail_web" {
   source = "./modules/compute/lightsail"
 
+  providers = {
+    aws      = aws
+    aws.use1 = aws.use1
+  }
+
   name              = "web-dev"
   availability_zone = "ap-south-1a"
   bundle_id         = "nano_3_1"
   create_snapshot   = true 
   disk_size_gb = 50
+  domain_name = var.domain_name
 
   tags = {
     Client = "spakcommgroup"

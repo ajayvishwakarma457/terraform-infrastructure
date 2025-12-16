@@ -19,7 +19,6 @@
         Ports (22, 80, 443, custom)
         Protocols (TCP / UDP)
     Lightsail firewall ≠ EC2 Security Group
-    Lightsail firewall ≠ EC2 Security Group
     It is instance-scoped and simpler.
 
 
