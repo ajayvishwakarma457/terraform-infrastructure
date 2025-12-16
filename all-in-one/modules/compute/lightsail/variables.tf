@@ -35,3 +35,9 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "create_snapshot" {
+  description = "Whether to create an initial snapshot"
+  type        = bool
+  default     = false
+}

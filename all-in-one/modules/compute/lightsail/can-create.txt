@@ -1,0 +1,74 @@
+
+
+1. Compute
+    Lightsail Instance
+        OS / blueprint
+            Bundle (nano, micro, etc.)
+            Availability zone
+            User data
+        Instance Snapshot
+        Instance Disk
+        Attach / detach disk
+
+
+
+2. Networking
+    Static IP
+    Attach static IP to instance
+    Firewall rules (instance-level)
+        Ports (22, 80, 443, custom)
+        Protocols (TCP / UDP)
+    Lightsail firewall ≠ EC2 Security Group
+    Lightsail firewall ≠ EC2 Security Group
+    It is instance-scoped and simpler.
+
+
+3. DNS (Lightsail-managed)
+    DNS Zone
+    Domain records
+        A
+        AAAA
+        CNAME
+        MX
+        TXT
+    Domain assignment
+        Point domain → instance
+        Point domain → static IP
+        Point domain → load balancer
+    👉 This replaces Route53 if you want simplicity.
+
+
+
+4. Load Balancing
+    Lightsail Load Balancer
+    Attach instances
+    Health checks
+    HTTPS via Lightsail-managed cert
+    If you use Lightsail LB, you don’t need certbot.
+
+
+5. Storage
+    Object Storage (Lightsail S3-like)
+    Buckets
+    Bucket access keys
+    Attach bucket to instance
+
+
+6. Databases
+    Managed database
+        MySQL
+        PostgreSQL
+    Database snapshot
+    Database users
+
+
+7. Containers
+    Lightsail Container Service
+    Container deployments
+    Public endpoints
+
+
+8. Certificates (limited)
+    Certificate for Lightsail Load Balancer
+    ❌ Not for instances directly
+    For instances → you still use certbot + Ansible
