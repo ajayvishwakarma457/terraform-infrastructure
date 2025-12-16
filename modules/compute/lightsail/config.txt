@@ -17,7 +17,6 @@
 6) Open browser:
     http://13.204.180.216
 
-
 7) Minimal correct path (what you should do next)
     Add 443 to Lightsail firewall
     Point domain → Lightsail static IP (Route53 already done)
@@ -29,10 +28,3 @@
 
 
 
-
-
-
-
-
-
-    certbot --nginx -d spakcommgroup.com -d www.spakcommgroup.com
