@@ -120,17 +120,11 @@ module "s3_app" {
 module "lightsail_web" {
   source = "./modules/compute/lightsail"
 
-  providers = {
-    aws      = aws
-    aws.use1 = aws.use1
-  }
-
   name              = "web-dev"
   availability_zone = "ap-south-1a"
   bundle_id         = "nano_3_1"
   create_snapshot   = true 
   disk_size_gb = 50
-  domain_name = var.domain_name
 
   tags = {
     Client = "spakcommgroup"
