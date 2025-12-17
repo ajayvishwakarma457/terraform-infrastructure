@@ -72,3 +72,21 @@ variable "db_master_password" {
   type      = string
   sensitive = true
 }
+
+variable "service_name" {
+  type = string
+}
+
+variable "power" {
+  type = string
+  # valid: nano | micro | small | medium
+}
+
+variable "scale" {
+  type = number
+}
+
+variable "container_image" {
+  type = string
+  # example: "nginx:latest" or "public.ecr.aws/nginx/nginx:latest"
+}

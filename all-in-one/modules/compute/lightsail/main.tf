@@ -110,13 +110,41 @@ resource "aws_lightsail_database" "this" {
   tags = var.tags
 }
 
-# resource "aws_lightsail_database_user" "app_user" {
-#   database_name = aws_lightsail_database.this.database_name
-#   username      = "app_user"
-#   password      = var.app_db_password
-# }
+resource "aws_lightsail_container_service" "this" {
+  name  = var.service_name
+  power = var.power        # nano | micro | small | medium
+  scale = var.scale        # number of containers
+  tags = var.tags
+}
 
-# resource "aws_lightsail_database_snapshot" "this" {
-#   database_name = aws_lightsail_database.this.database_name
-#   name          = "${aws_lightsail_database.this.database_name}-snapshot"
-# }
+resource "aws_lightsail_container_service_deployment_version" "this" {
+  service_name = aws_lightsail_container_service.this.name
+
+  container {
+    container_name = "app"
+    image = var.container_image
+    ports = {
+      "80" = "HTTP"
+    }
+    environment = {
+      NODE_ENV = "dev"
+    }
+  }
+
+    # 🔴 THIS IS WHAT YOU WERE MISSING
+  public_endpoint {
+    container_name = "app"
+    container_port = 80
+
+    health_check {
+      path                = "/"
+      success_codes       = "200-399"
+      interval_seconds    = 10
+      timeout_seconds     = 5
+      healthy_threshold   = 2
+      unhealthy_threshold = 2
+    }
+  }
+
+}
+

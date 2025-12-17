@@ -22,7 +22,7 @@
     It is instance-scoped and simpler.
 
 
-3. DNS (Lightsail-managed)
+3. DNS (Lightsail-managed) (pending)
     DNS Zone
     Domain records
         A
@@ -57,11 +57,11 @@
     Managed database
         MySQL
         PostgreSQL
-    Database snapshot
-    Database users
+    Database snapshot (no by Terraform)
+    Database users (by Ansible)
 
 
-7. Containers
+7. Containers 
     Lightsail Container Service
     Container deployments
     Public endpoints

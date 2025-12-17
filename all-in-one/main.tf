@@ -133,6 +133,10 @@ module "lightsail_web" {
   db_master_user          = "admin"
   db_master_password      = "StrongPassword123!"
 
+  service_name = "web-container-dev"
+  power        = "micro"
+  scale        = 1
+  container_image = "nginx:latest"
 
   tags = {
     Client = "spakcommgroup"
