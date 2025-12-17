@@ -94,4 +94,29 @@ resource "aws_lightsail_disk_attachment" "this" {
   disk_path     = "/dev/xvdf"
 }
 
+resource "aws_lightsail_database" "this" {
+  relational_database_name = var.db_name
 
+  availability_zone = var.availability_zone
+
+  blueprint_id = var.db_blueprint_id
+  bundle_id    = var.db_bundle_id
+
+  master_database_name = var.master_database_name
+  master_username      = var.db_master_user
+  master_password      = var.db_master_password
+
+  publicly_accessible = false
+  tags = var.tags
+}
+
+# resource "aws_lightsail_database_user" "app_user" {
+#   database_name = aws_lightsail_database.this.database_name
+#   username      = "app_user"
+#   password      = var.app_db_password
+# }
+
+# resource "aws_lightsail_database_snapshot" "this" {
+#   database_name = aws_lightsail_database.this.database_name
+#   name          = "${aws_lightsail_database.this.database_name}-snapshot"
+# }

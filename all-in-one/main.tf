@@ -126,6 +126,14 @@ module "lightsail_web" {
   create_snapshot   = true 
   disk_size_gb = 50
 
+  db_name                 = "web-dev-db"
+  db_blueprint_id         = "mysql_8_0"
+  db_bundle_id            = "micro_2_0"
+  master_database_name    = "appdb"
+  db_master_user          = "admin"
+  db_master_password      = "StrongPassword123!"
+
+
   tags = {
     Client = "spakcommgroup"
     Env    = "dev"

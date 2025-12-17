@@ -47,3 +47,28 @@ variable "disk_size_gb" {
   description = "Size of Lightsail instance disk in GB"
   default     = 20
 }
+
+variable "db_name" {
+  type = string
+}
+
+variable "db_blueprint_id" {
+  type = string
+}
+
+variable "db_bundle_id" {
+  type = string
+}
+
+variable "master_database_name" {
+  type = string
+}
+
+variable "db_master_user" {
+  type = string
+}
+
+variable "db_master_password" {
+  type      = string
+  sensitive = true
+}
