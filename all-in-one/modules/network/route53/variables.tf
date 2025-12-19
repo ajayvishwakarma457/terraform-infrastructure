@@ -25,6 +25,11 @@ variable "records" {
     set_identifier = optional(string)
     weight         = optional(number)
     latency_region = optional(string)
+    geo_location = optional(object({
+      country     = optional(string)
+      continent   = optional(string)
+      subdivision = optional(string)
+    }))
   }))
   default = []
 }

@@ -37,4 +37,15 @@ resource "aws_route53_record" "this" {
     }
   }
 
+
+  dynamic "geolocation_routing_policy" {
+    for_each = lookup(each.value, "geo_location", null) != null ? [1] : []
+    content {
+      country     = lookup(each.value.geo_location, "country", null)
+      continent   = lookup(each.value.geo_location, "continent", null)
+      subdivision = lookup(each.value.geo_location, "subdivision", null)
+    }
+  }
+
+
 }

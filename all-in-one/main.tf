@@ -62,24 +62,56 @@ module "route53" {
     # For Weighted Routing
 
     # For Latency Based Routing
-     {
-        name           = "@"
-        type           = "A"
-        ttl            = 300
-        records        = ["13.203.208.203"]
-        set_identifier = "mumbai"
-        latency_region = "ap-south-1"
-      },
-      {
-        name           = "@"
-        type           = "A"
-        ttl            = 300
-        records        = ["18.141.197.30"]
-        set_identifier = "singapore"
-        latency_region = "ap-southeast-1"
-      },
+    #  {
+    #     name           = "@"
+    #     type           = "A"
+    #     ttl            = 300
+    #     records        = ["13.203.208.203"]
+    #     set_identifier = "mumbai"
+    #     latency_region = "ap-south-1"
+    #   },
+    #   {
+    #     name           = "@"
+    #     type           = "A"
+    #     ttl            = 300
+    #     records        = ["18.141.197.30"]
+    #     set_identifier = "singapore"
+    #     latency_region = "ap-southeast-1"
+    #   },
     # For Latency Based Routing
-    
+
+    # For Geolocation Routing
+    # India users
+    {
+      name           = "@"
+      type           = "A"
+      ttl            = 300
+      records        = ["13.203.208.203"]
+      set_identifier = "india"
+      geo_location = {country = "IN"}
+    },
+
+    # Singapore users
+    {
+      name           = "@"
+      type           = "A"
+      ttl            = 300
+      records        = ["18.141.197.30"]
+      set_identifier = "singapore"
+      geo_location = {country = "SG"}
+    },
+
+    # Default (everyone else)
+    {
+      name           = "@"
+      type           = "A"
+      ttl            = 300
+      records        = ["3.110.174.241"]
+      set_identifier = "default"
+      geo_location   = {country = "*"}
+    },
+    # For Geolocation Routing
+
     {
       name    = "www"
       type    = "A"
