@@ -36,13 +36,58 @@ module "route53" {
       name    = ""
       type    = "A"
       ttl     = 300
-      records = [module.ec2.public_ip]
+      records = ["13.203.208.203", "3.110.174.241"] # [module.ec2.public_ip]
     },
     {
       name    = "www"
       type    = "A"
       ttl     = 300
       records = [module.ec2.public_ip] # [aws_instance.web.public_ip] 
+    },
+    {
+      name    = "@"
+      type    = "TXT"
+      ttl     = 300
+      records = ["v=spf1 include:_spf.google.com ~all"]
+    },
+    {
+      name    = "@"
+      type    = "CAA"
+      ttl     = 300
+      records = ["0 issue \"letsencrypt.org\""]
+    },
+    {
+      name = "@"
+      type = "MX"
+      ttl  = 300
+      records = [
+        "1 ASPMX.L.GOOGLE.COM",
+        "5 ALT1.ASPMX.L.GOOGLE.COM",
+        "5 ALT2.ASPMX.L.GOOGLE.COM",
+        "10 ALT3.ASPMX.L.GOOGLE.COM",
+        "10 ALT4.ASPMX.L.GOOGLE.COM"
+      ]
+    }, 
+    {
+      name    = "api"
+      type    = "CNAME"
+      ttl     = 300
+      records = ["backend.example.com"]
+    }, 
+    {
+      name    = "_https._tcp"
+      type    = "SRV"
+      ttl     = 300
+      records = [
+        "10 60 443 server1.spakcommgroup.com",
+        "10 20 443 server2.spakcommgroup.com"
+      ]
+    }, 
+    {
+      name    = "245.39.201.13.in-addr.arpa"
+      type    = "PTR"
+      ttl     = 300
+      records = ["mail.spakcommgroup.com"]
     }
   ]
 
@@ -100,15 +145,15 @@ module "ec2" {
 }
 
 module "s3_app" {
-  source = "./modules/storage/s3"
-  bucket_name = "spakcommgroup-app-dev"
+  source        = "./modules/storage/s3"
+  bucket_name   = "spakcommgroup-app-dev"
   force_destroy = false
   lifecycle_rules = [
     {
-      id               = "logs-archive"
-      enabled          = true
-      transitions      = [{ days = 30, storage_class = "STANDARD_IA" }]
-      expiration_days  = 365
+      id              = "logs-archive"
+      enabled         = true
+      transitions     = [{ days = 30, storage_class = "STANDARD_IA" }]
+      expiration_days = 365
     }
   ]
   tags = {
@@ -123,19 +168,19 @@ module "lightsail_web" {
   name              = "web-dev"
   availability_zone = "ap-south-1a"
   bundle_id         = "nano_3_1"
-  create_snapshot   = true 
-  disk_size_gb = 50
+  create_snapshot   = true
+  disk_size_gb      = 50
 
-  db_name                 = "web-dev-db"
-  db_blueprint_id         = "mysql_8_0"
-  db_bundle_id            = "micro_2_0"
-  master_database_name    = "appdb"
-  db_master_user          = "admin"
-  db_master_password      = "StrongPassword123!"
+  db_name              = "web-dev-db"
+  db_blueprint_id      = "mysql_8_0"
+  db_bundle_id         = "micro_2_0"
+  master_database_name = "appdb"
+  db_master_user       = "admin"
+  db_master_password   = "StrongPassword123!"
 
-  service_name = "web-container-dev"
-  power        = "micro"
-  scale        = 1
+  service_name    = "web-container-dev"
+  power           = "micro"
+  scale           = 1
   container_image = "nginx:latest"
 
   tags = {

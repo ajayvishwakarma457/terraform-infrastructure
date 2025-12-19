@@ -3,8 +3,8 @@ Core Route 53 resources Terraform can create/manage
 
 1. Hosted Zones
     Public hosted zones (internet-facing domains)
-    Private hosted zones (VPC-internal DNS)
-    Associate / disassociate private zones with VPCs
+    Private hosted zones (VPC-internal DNS) (pending)
+    Associate / disassociate private zones with VPCs (pending)
 
 Examples:
     example.com public zone
