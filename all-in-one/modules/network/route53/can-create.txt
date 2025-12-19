@@ -1,0 +1,105 @@
+Core Route 53 resources Terraform can create/manage
+
+
+1. Hosted Zones
+    Public hosted zones (internet-facing domains)
+    Private hosted zones (VPC-internal DNS)
+    Associate / disassociate private zones with VPCs
+
+Examples:
+    example.com public zone
+    internal.example.com private zone linked to VPC
+
+================================================================================================================================================================
+
+2. DNS Records
+
+    All common record types:
+        A, AAAA
+        CNAME
+        MX
+        TXT
+        NS
+        SRV
+        PTR
+        CAA
+
+    Advanced routing supported:
+        Simple routing
+        Weighted routing
+        Latency-based routing
+        Geolocation routing
+        Geoproximity routing
+        Failover routing
+        Alias records (ALB, NLB, CloudFront, S3, API Gateway, Lightsail)    
+
+================================================================================================================================================================
+
+3. Health Checks
+
+    HTTP / HTTPS / TCP health checks
+    String matching
+    Failure thresholds
+    CloudWatch alarm–based health checks
+    Used for:
+    Failover DNS
+    Active-passive setups
+
+
+================================================================================================================================================================
+
+4. Traffic Policies
+
+    Traffic policy documents
+    Traffic policy instances
+    Used for complex routing logic (less common, but supported)
+
+
+================================================================================================================================================================
+
+5. Domain Registration (Limited)
+    Terraform can:
+        Register domains
+        Manage domain settings (auto-renew, transfer lock)
+        Manage name servers
+    Note: many teams don’t manage domain registration in Terraform; they only manage DNS.
+
+
+================================================================================================================================================================
+
+6. Query Logging
+
+    Enable Route 53 query logging
+    Send DNS query logs to CloudWatch Logs
+
+
+================================================================================================================================================================
+
+7. Resolver (VPC DNS – important for enterprises)
+
+    Inbound resolver endpoints
+    Outbound resolver endpoints
+    Resolver rules (forwarding rules)
+    Rule associations with VPCs
+
+Used for:
+    Hybrid DNS (on-prem ↔ AWS)
+    Corporate DNS integration
+
+
+================================================================================================================================================================
+
+8. DNSSEC
+    Enable DNSSEC signing
+    Manage KMS keys for DNSSEC
+    Key signing key (KSK)
+
+================================================================================================================================================================
+
+In real projects, Terraform is mostly used for
+    90% of cases:
+    Hosted zones
+    A / CNAME / Alias records
+    Health checks + failover
+    Private DNS for microservices
+    Resolver rules for hybrid setups
