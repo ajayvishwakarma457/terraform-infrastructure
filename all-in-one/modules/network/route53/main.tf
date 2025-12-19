@@ -22,6 +22,7 @@ resource "aws_route53_record" "this" {
   records = each.value.records
 
   set_identifier = lookup(each.value, "set_identifier", null)
+  health_check_id = lookup(each.value, "health_check_id", null)
 
   dynamic "weighted_routing_policy" {
     for_each = lookup(each.value, "weight", null) != null ? [1] : []
@@ -47,5 +48,12 @@ resource "aws_route53_record" "this" {
     }
   }
 
+  
+  dynamic "failover_routing_policy" {
+    for_each = lookup(each.value, "failover_type", null) != null ? [1] : []
+    content {
+      type = each.value.failover_type
+    }
+  }
 
 }

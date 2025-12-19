@@ -29,7 +29,7 @@ Examples:
         Weighted routing
         Latency-based routing
         Geolocation routing
-        Geoproximity routing
+        Geoproximity routing (skipping)
         Failover routing
         Alias records (ALB, NLB, CloudFront, S3, API Gateway, Lightsail)    
 

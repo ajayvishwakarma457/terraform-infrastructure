@@ -30,6 +30,8 @@ variable "records" {
       continent   = optional(string)
       subdivision = optional(string)
     }))
+    failover_type     = optional(string) # PRIMARY | SECONDARY
+    health_check_id   = optional(string)
   }))
   default = []
 }

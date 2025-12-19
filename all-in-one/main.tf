@@ -82,35 +82,59 @@ module "route53" {
 
     # For Geolocation Routing
     # India users
-    {
-      name           = "@"
-      type           = "A"
-      ttl            = 300
-      records        = ["13.203.208.203"]
-      set_identifier = "india"
-      geo_location = {country = "IN"}
-    },
+    # {
+    #   name           = "@"
+    #   type           = "A"
+    #   ttl            = 300
+    #   records        = ["13.203.208.203"]
+    #   set_identifier = "india"
+    #   geo_location = {country = "IN"}
+    # },
 
-    # Singapore users
-    {
-      name           = "@"
-      type           = "A"
-      ttl            = 300
-      records        = ["18.141.197.30"]
-      set_identifier = "singapore"
-      geo_location = {country = "SG"}
-    },
+    # # Singapore users
+    # {
+    #   name           = "@"
+    #   type           = "A"
+    #   ttl            = 300
+    #   records        = ["18.141.197.30"]
+    #   set_identifier = "singapore"
+    #   geo_location = {country = "SG"}
+    # },
 
-    # Default (everyone else)
-    {
-      name           = "@"
-      type           = "A"
-      ttl            = 300
-      records        = ["3.110.174.241"]
-      set_identifier = "default"
-      geo_location   = {country = "*"}
-    },
+    # # Default (everyone else)
+    # {
+    #   name           = "@"
+    #   type           = "A"
+    #   ttl            = 300
+    #   records        = ["3.110.174.241"]
+    #   set_identifier = "default"
+    #   geo_location   = {country = "*"}
+    # },
     # For Geolocation Routing
+
+    # For Failover Routing
+    # PRIMARY (Mumbai)
+    {
+      name            = "@"
+      type            = "A"
+      ttl             = 300
+      records         = ["13.203.208.203"]
+      set_identifier  = "primary-mumbai"
+      failover_type   = "PRIMARY"
+      health_check_id = aws_route53_health_check.primary.id
+    },
+
+    # SECONDARY (Singapore)
+    {
+      name            = "@"
+      type            = "A"
+      ttl             = 300
+      records         = ["18.141.197.30"]
+      set_identifier  = "secondary-singapore"
+      failover_type   = "SECONDARY"
+      health_check_id = aws_route53_health_check.secondary.id
+    },
+    # For Failover Routing
 
     {
       name    = "www"
