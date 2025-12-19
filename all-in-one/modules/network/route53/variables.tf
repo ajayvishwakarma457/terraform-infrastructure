@@ -24,6 +24,7 @@ variable "records" {
     records = list(string)
     set_identifier = optional(string)
     weight         = optional(number)
+    latency_region = optional(string)
   }))
   default = []
 }

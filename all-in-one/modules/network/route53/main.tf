@@ -30,4 +30,11 @@ resource "aws_route53_record" "this" {
     }
   }
 
+  dynamic "latency_routing_policy" {
+    for_each = lookup(each.value, "latency_region", null) != null ? [1] : []
+    content {
+      region = each.value.latency_region
+    }
+  }
+
 }

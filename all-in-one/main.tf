@@ -32,6 +32,7 @@ module "route53" {
   zone_name   = var.domain_name
   create_zone = true
   records = [
+
     # For Simple Routing
     # {
     #   name    = ""
@@ -39,23 +40,46 @@ module "route53" {
     #   ttl     = 300
     #   records = ["13.203.208.203"] # [module.ec2.public_ip]
     # },
+    # For Simple Routing
+
     # For Weighted Routing
-    {
-      name           = "@"
-      type           = "A"
-      ttl            = 300
-      records        = ["13.203.208.203"]
-      set_identifier = "instance-1"
-      weight         = 80
-    },
-    {
-      name           = "@"
-      type           = "A"
-      ttl            = 300
-      records        = ["3.110.174.241"]
-      set_identifier = "instance-2"
-      weight         = 20
-    },
+    # {
+    #   name           = "@"
+    #   type           = "A"
+    #   ttl            = 300
+    #   records        = ["13.203.208.203"]
+    #   set_identifier = "instance-1"
+    #   weight         = 80
+    # },
+    # {
+    #   name           = "@"
+    #   type           = "A"
+    #   ttl            = 300
+    #   records        = ["3.110.174.241"]
+    #   set_identifier = "instance-2"
+    #   weight         = 20
+    # },
+    # For Weighted Routing
+
+    # For Latency Based Routing
+     {
+        name           = "@"
+        type           = "A"
+        ttl            = 300
+        records        = ["13.203.208.203"]
+        set_identifier = "mumbai"
+        latency_region = "ap-south-1"
+      },
+      {
+        name           = "@"
+        type           = "A"
+        ttl            = 300
+        records        = ["18.141.197.30"]
+        set_identifier = "singapore"
+        latency_region = "ap-southeast-1"
+      },
+    # For Latency Based Routing
+    
     {
       name    = "www"
       type    = "A"
