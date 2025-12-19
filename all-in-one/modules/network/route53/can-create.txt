@@ -31,7 +31,7 @@ Examples:
         Geolocation routing
         Geoproximity routing (skipping)
         Failover routing
-        Alias records (ALB, NLB, CloudFront, S3, API Gateway, Lightsail)    
+        Alias records (ALB, NLB, CloudFront, S3, API Gateway, Lightsail) (pending)   
 
 ================================================================================================================================================================
 
