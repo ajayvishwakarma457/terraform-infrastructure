@@ -20,4 +20,14 @@ resource "aws_route53_record" "this" {
   type    = each.value.type
   ttl     = each.value.ttl
   records = each.value.records
+
+  set_identifier = lookup(each.value, "set_identifier", null)
+
+  dynamic "weighted_routing_policy" {
+    for_each = lookup(each.value, "weight", null) != null ? [1] : []
+    content {
+      weight = each.value.weight
+    }
+  }
+
 }

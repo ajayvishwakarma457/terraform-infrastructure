@@ -32,11 +32,29 @@ module "route53" {
   zone_name   = var.domain_name
   create_zone = true
   records = [
+    # For Simple Routing
+    # {
+    #   name    = ""
+    #   type    = "A"
+    #   ttl     = 300
+    #   records = ["13.203.208.203"] # [module.ec2.public_ip]
+    # },
+    # For Weighted Routing
     {
-      name    = ""
-      type    = "A"
-      ttl     = 300
-      records = ["13.203.208.203", "3.110.174.241"] # [module.ec2.public_ip]
+      name           = "@"
+      type           = "A"
+      ttl            = 300
+      records        = ["13.203.208.203"]
+      set_identifier = "instance-1"
+      weight         = 80
+    },
+    {
+      name           = "@"
+      type           = "A"
+      ttl            = 300
+      records        = ["3.110.174.241"]
+      set_identifier = "instance-2"
+      weight         = 20
     },
     {
       name    = "www"
@@ -51,12 +69,6 @@ module "route53" {
       records = ["v=spf1 include:_spf.google.com ~all"]
     },
     {
-      name    = "@"
-      type    = "CAA"
-      ttl     = 300
-      records = ["0 issue \"letsencrypt.org\""]
-    },
-    {
       name = "@"
       type = "MX"
       ttl  = 300
@@ -67,27 +79,12 @@ module "route53" {
         "10 ALT3.ASPMX.L.GOOGLE.COM",
         "10 ALT4.ASPMX.L.GOOGLE.COM"
       ]
-    }, 
+    },
     {
       name    = "api"
       type    = "CNAME"
       ttl     = 300
       records = ["backend.example.com"]
-    }, 
-    {
-      name    = "_https._tcp"
-      type    = "SRV"
-      ttl     = 300
-      records = [
-        "10 60 443 server1.spakcommgroup.com",
-        "10 20 443 server2.spakcommgroup.com"
-      ]
-    }, 
-    {
-      name    = "245.39.201.13.in-addr.arpa"
-      type    = "PTR"
-      ttl     = 300
-      records = ["mail.spakcommgroup.com"]
     }
   ]
 

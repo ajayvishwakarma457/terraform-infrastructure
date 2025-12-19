@@ -22,6 +22,8 @@ variable "records" {
     type    = string
     ttl     = number
     records = list(string)
+    set_identifier = optional(string)
+    weight         = optional(number)
   }))
   default = []
 }

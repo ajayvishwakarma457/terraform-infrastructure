@@ -5,35 +5,53 @@
 # Terraform working directories
 all-in-one/**/.terraform/
 all-in-one/.terraform/
+others/**/.terraform/
+others/.terraform/
+
 
 # Terraform state files
 all-in-one/**/*.tfstate
 all-in-one/**/*.tfstate.*
+others/**/*.tfstate
+others/**/*.tfstate.*
 
 # Terraform plan files
 all-in-one/**/*.tfplan
+others/**/*.tfplan
 
 # Terraform crash logs
 all-in-one/**/crash.log
 all-in-one/**/crash.*.log
+others/**/crash.log
+others/**/crash.*.log
 
 # Override files (local-only)
 all-in-one/**/override.tf
 all-in-one/**/override.tf.json
 all-in-one/**/*_override.tf
 all-in-one/**/*_override.tf.json
+others/**/override.tf
+others/**/override.tf.json
+others/**/*_override.tf
+others/**/*_override.tf.json
 
 # Terraform CLI config
 all-in-one/**/.terraformrc
 all-in-one/**/terraform.rc
+others/**/.terraformrc
+others/**/terraform.rc
 
 # Sensitive variable files
 all-in-one/**/*.tfvars
 all-in-one/**/*.tfvars.json
+others/**/*.tfvars
+others/**/*.tfvars.json
 
 # Backup files
 all-in-one/**/*.backup
 all-in-one/**/*.bak
+others/**/*.backup
+others/**/*.bak
 
 
 ####################################
@@ -46,6 +64,13 @@ all-in-one/backend/terraform.tfstate.*
 all-in-one/backend/*.tfplan
 all-in-one/backend/*.backup
 all-in-one/backend/*.bak
+
+others/backend/.terraform/
+others/backend/terraform.tfstate
+others/backend/terraform.tfstate.*
+others/backend/*.tfplan
+others/backend/*.backup
+others/backend/*.bak
 
 
 ####################################
