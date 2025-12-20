@@ -1,4 +1,5 @@
 
+
 module "vpc" {
   source               = "./modules/network/vpc"
   project_name         = var.project_name
@@ -226,6 +227,19 @@ module "web_sg" {
   tags = {
     Client = "spakcommgroup"
     Env    = "dev"
+  }
+}
+
+module "ami" {
+  source = "./modules/image/ami"
+  source_instance_id = module.ec2.instance_id
+  name               = "tanvora-web-${var.environment}-v1"
+
+  tags = {
+    Project     = "tanvora"
+    Environment = var.environment
+    ManagedBy   = "terraform"
+    Name = "Tanvora"
   }
 }
 

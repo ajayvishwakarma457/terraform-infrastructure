@@ -70,3 +70,8 @@ variable "domain_name" {
   type        = string
   default = "spakcommgroup.com"
 }
+
+variable "environment" {
+  description = "Deployment environment (dev, qa, prod)"
+  type        = string
+}
