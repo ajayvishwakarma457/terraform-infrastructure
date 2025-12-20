@@ -8,7 +8,6 @@ resource "aws_instance" "this" {
   user_data              = var.user_data
   iam_instance_profile   = var.iam_instance_profile
 
-
   tags = merge(
     var.tags,
     {

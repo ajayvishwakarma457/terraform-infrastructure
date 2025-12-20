@@ -241,6 +241,11 @@ module "ec2" {
   tags = {
     Client = "spakcommgroup"
     Env    = "dev"
+    Project     = "tanvora"
+    Environment = "dev"
+    Owner       = "ajay"
+    ManagedBy   = "terraform"
+    CostCenter  = "web"
   }
 }
 
