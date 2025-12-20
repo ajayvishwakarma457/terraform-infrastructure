@@ -1,5 +1,5 @@
 terraform destroy -target=module.vpc
-terraform apply -target=module.vpc
+terraform apply -target=module.ec2
 
 
 

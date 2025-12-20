@@ -238,6 +238,9 @@ module "ec2" {
   security_group_ids = [module.web_sg.id]
   key_name           = "master-key-pair"
   iam_instance_profile = module.iam.instance_profile_name
+
+  user_data = file("${path.module}/modules/compute/ec2/web-dev.sh")
+
   tags = {
     Client = "spakcommgroup"
     Env    = "dev"

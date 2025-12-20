@@ -5,7 +5,7 @@ resource "aws_instance" "this" {
   vpc_security_group_ids = var.security_group_ids
   key_name               = var.key_name
   associate_public_ip_address = var.associate_public_ip
-  user_data              = var.user_data
+  user_data              = var.user_data != null ? var.user_data : file("${path.module}/modules/compute/ec2/web-dev.sh")
   iam_instance_profile   = var.iam_instance_profile
 
   tags = merge(
