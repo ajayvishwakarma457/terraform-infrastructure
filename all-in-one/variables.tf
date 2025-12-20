@@ -75,3 +75,8 @@ variable "environment" {
   description = "Deployment environment (dev, qa, prod)"
   type        = string
 }
+
+variable "ami_versions" {
+  description = "AMI versions per environment"
+  type        = map(string)
+}

@@ -246,6 +246,7 @@ module "ami" {
 module "ec2" {
   source             = "./modules/compute/ec2"
   name               = "web-dev"
+  # ami_id = var.ami_versions[var.environment] # for version control
   ami_id             =  "ami-02b8269d5e85954ef"
   instance_type      = "t3.small"
   subnet_id          = module.vpc.public_subnet_ids[0]

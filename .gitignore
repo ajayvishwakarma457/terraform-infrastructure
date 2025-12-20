@@ -42,10 +42,10 @@ others/**/.terraformrc
 others/**/terraform.rc
 
 # Sensitive variable files
-all-in-one/**/*.tfvars
-all-in-one/**/*.tfvars.json
-others/**/*.tfvars
-others/**/*.tfvars.json
+# all-in-one/**/*.tfvars
+# all-in-one/**/*.tfvars.json
+# others/**/*.tfvars
+# others/**/*.tfvars.json
 
 # Backup files
 all-in-one/**/*.backup
