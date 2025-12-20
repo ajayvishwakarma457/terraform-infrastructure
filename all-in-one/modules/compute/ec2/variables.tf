@@ -45,3 +45,8 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "iam_instance_profile" {
+  type = string
+  description = "IAM Instance Profile to attach to EC2"
+}

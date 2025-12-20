@@ -12,3 +12,7 @@ output "ajay_user_name" {
   value       = aws_iam_user.ajay_user.name
   description = "IAM username created for admin"
 }
+
+output "instance_profile_name" {
+  value = aws_iam_instance_profile.ec2_profile.name
+}

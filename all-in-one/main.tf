@@ -10,11 +10,11 @@ module "vpc" {
   availability_zones   = var.availability_zones
 }
 
-# module "iam" {
-#   source       = "./modules/security/iam"
-#   project_name = var.project_name
-#   common_tags  = var.common_tags
-# }
+module "iam" {
+  source       = "./modules/security/iam"
+  project_name = var.project_name
+  common_tags  = var.common_tags
+}
 
 # module "acm" {
 #   source                    = "./modules/security/acm"
@@ -237,6 +237,7 @@ module "ec2" {
   subnet_id          = module.vpc.public_subnet_ids[0]
   security_group_ids = [module.web_sg.id]
   key_name           = "master-key-pair"
+  iam_instance_profile = module.iam.instance_profile_name
   tags = {
     Client = "spakcommgroup"
     Env    = "dev"
