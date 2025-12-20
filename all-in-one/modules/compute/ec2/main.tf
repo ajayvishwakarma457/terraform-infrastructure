@@ -13,4 +13,9 @@ resource "aws_instance" "this" {
       Name = var.name
     }
   )
+
+  lifecycle {
+    prevent_destroy = false   # or false
+  }
+
 }

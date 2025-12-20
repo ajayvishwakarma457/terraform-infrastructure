@@ -1,14 +1,14 @@
 
-# module "vpc" {
-#   source               = "./modules/network/vpc"
-#   project_name         = var.project_name
-#   aws_region           = var.aws_region
-#   common_tags          = var.common_tags
-#   vpc_cidr             = var.vpc_cidr
-#   public_subnet_cidrs  = var.public_subnet_cidrs
-#   private_subnet_cidrs = var.private_subnet_cidrs
-#   availability_zones   = var.availability_zones
-# }
+module "vpc" {
+  source               = "./modules/network/vpc"
+  project_name         = var.project_name
+  aws_region           = var.aws_region
+  common_tags          = var.common_tags
+  vpc_cidr             = var.vpc_cidr
+  public_subnet_cidrs  = var.public_subnet_cidrs
+  private_subnet_cidrs = var.private_subnet_cidrs
+  availability_zones   = var.availability_zones
+}
 
 # module "iam" {
 #   source       = "./modules/security/iam"
@@ -27,221 +27,221 @@
 #   }
 # }
 
-module "route53" {
-  source      = "./modules/network/route53"
-  zone_name   = var.domain_name
-  create_zone = true
-  records = [
+# module "route53" {
+#   source      = "./modules/network/route53"
+#   zone_name   = var.domain_name
+#   create_zone = true
+#   records = [
 
-    # For Simple Routing
-    # {
-    #   name    = ""
-    #   type    = "A"
-    #   ttl     = 300
-    #   records = ["13.203.208.203"] # [module.ec2.public_ip]
-    # },
-    # For Simple Routing
+#     # For Simple Routing
+#     # {
+#     #   name    = ""
+#     #   type    = "A"
+#     #   ttl     = 300
+#     #   records = ["13.203.208.203"] # [module.ec2.public_ip]
+#     # },
+#     # For Simple Routing
 
-    # For Weighted Routing
-    # {
-    #   name           = "@"
-    #   type           = "A"
-    #   ttl            = 300
-    #   records        = ["15.207.111.124"]
-    #   set_identifier = "instance-1"
-    #   weight         = 80
-    # },
-    # {
-    #   name           = "@"
-    #   type           = "A"
-    #   ttl            = 300
-    #   records        = ["3.110.174.241"]
-    #   set_identifier = "instance-2"
-    #   weight         = 20
-    # },
-    # For Weighted Routing
+#     # For Weighted Routing
+#     # {
+#     #   name           = "@"
+#     #   type           = "A"
+#     #   ttl            = 300
+#     #   records        = ["15.207.111.124"]
+#     #   set_identifier = "instance-1"
+#     #   weight         = 80
+#     # },
+#     # {
+#     #   name           = "@"
+#     #   type           = "A"
+#     #   ttl            = 300
+#     #   records        = ["3.110.174.241"]
+#     #   set_identifier = "instance-2"
+#     #   weight         = 20
+#     # },
+#     # For Weighted Routing
 
-    # For Latency Based Routing
-    #  {
-    #     name           = "@"
-    #     type           = "A"
-    #     ttl            = 300
-    #     records        = ["13.203.208.203"]
-    #     set_identifier = "mumbai"
-    #     latency_region = "ap-south-1"
-    #   },
-    #   {
-    #     name           = "@"
-    #     type           = "A"
-    #     ttl            = 300
-    #     records        = ["18.141.197.30"]
-    #     set_identifier = "singapore"
-    #     latency_region = "ap-southeast-1"
-    #   },
-    # For Latency Based Routing
+#     # For Latency Based Routing
+#     #  {
+#     #     name           = "@"
+#     #     type           = "A"
+#     #     ttl            = 300
+#     #     records        = ["13.203.208.203"]
+#     #     set_identifier = "mumbai"
+#     #     latency_region = "ap-south-1"
+#     #   },
+#     #   {
+#     #     name           = "@"
+#     #     type           = "A"
+#     #     ttl            = 300
+#     #     records        = ["18.141.197.30"]
+#     #     set_identifier = "singapore"
+#     #     latency_region = "ap-southeast-1"
+#     #   },
+#     # For Latency Based Routing
 
-    # For Geolocation Routing
-    # India users
-    # {
-    #   name           = "@"
-    #   type           = "A"
-    #   ttl            = 300
-    #   records        = ["13.203.208.203"]
-    #   set_identifier = "india"
-    #   geo_location = {country = "IN"}
-    # },
+#     # For Geolocation Routing
+#     # India users
+#     # {
+#     #   name           = "@"
+#     #   type           = "A"
+#     #   ttl            = 300
+#     #   records        = ["13.203.208.203"]
+#     #   set_identifier = "india"
+#     #   geo_location = {country = "IN"}
+#     # },
 
-    # # Singapore users
-    # {
-    #   name           = "@"
-    #   type           = "A"
-    #   ttl            = 300
-    #   records        = ["18.141.197.30"]
-    #   set_identifier = "singapore"
-    #   geo_location = {country = "SG"}
-    # },
+#     # # Singapore users
+#     # {
+#     #   name           = "@"
+#     #   type           = "A"
+#     #   ttl            = 300
+#     #   records        = ["18.141.197.30"]
+#     #   set_identifier = "singapore"
+#     #   geo_location = {country = "SG"}
+#     # },
 
-    # # Default (everyone else)
-    # {
-    #   name           = "@"
-    #   type           = "A"
-    #   ttl            = 300
-    #   records        = ["3.110.174.241"]
-    #   set_identifier = "default"
-    #   geo_location   = {country = "*"}
-    # },
-    # For Geolocation Routing
+#     # # Default (everyone else)
+#     # {
+#     #   name           = "@"
+#     #   type           = "A"
+#     #   ttl            = 300
+#     #   records        = ["3.110.174.241"]
+#     #   set_identifier = "default"
+#     #   geo_location   = {country = "*"}
+#     # },
+#     # For Geolocation Routing
 
-    # For Failover Routing
-    # PRIMARY (Mumbai)
-    {
-      name            = "@"
-      type            = "A"
-      ttl             = 300
-      records         = ["15.207.111.124"]
-      set_identifier  = "primary-mumbai"
-      failover_type   = "PRIMARY"
-      health_check_id = aws_route53_health_check.primary.id
-    },
-
-    # SECONDARY (Singapore)
-    {
-      name            = "@"
-      type            = "A"
-      ttl             = 300
-      records         = ["3.110.174.241"]
-      set_identifier  = "secondary-mumbai"
-      failover_type   = "SECONDARY"
-      health_check_id = aws_route53_health_check.secondary.id
-    },
-    # For Failover Routing
-
-    # {
-    #   name    = "www"
-    #   type    = "A"
-    #   ttl     = 300
-    #   records = [module.ec2.public_ip] # [aws_instance.web.public_ip] 
-    # },
-    {
-      name    = "@"
-      type    = "TXT"
-      ttl     = 300
-      records = ["v=spf1 include:_spf.google.com ~all"]
-    },
-    {
-      name = "@"
-      type = "MX"
-      ttl  = 300
-      records = [
-        "1 ASPMX.L.GOOGLE.COM",
-        "5 ALT1.ASPMX.L.GOOGLE.COM",
-        "5 ALT2.ASPMX.L.GOOGLE.COM",
-        "10 ALT3.ASPMX.L.GOOGLE.COM",
-        "10 ALT4.ASPMX.L.GOOGLE.COM"
-      ]
-    },
-    {
-      name    = "api"
-      type    = "CNAME"
-      ttl     = 300
-      records = ["backend.example.com"]
-    }
-  ]
-
-  tags = {
-    Client = "client-a"
-    Env    = "dev"
-  }
-}
-
-module "cloudwatch" {
-  source = "./modules/Management-and-Governance/cloudwatch"
-
-   providers = {
-    aws = aws.use1
-  }
-
-  log_group_name     = "/aws/route53/spakcommgroup"
-  retention_in_days = 7
-
-  tags = {
-    Client = "client-a"
-    Env    = "dev"
-  }
-}
-
-resource "aws_route53_query_log" "this" {
-  provider = aws.use1
-  zone_id                 = module.route53.zone_id
-  cloudwatch_log_group_arn = module.cloudwatch.log_group_arn
-}
-
-# module "web_sg" {
-#   source = "./modules/security/sg"
-
-#   name   = "web-sg-dev"
-#   vpc_id = module.vpc.vpc_id
-
-#   ingress_rules = [
+#     # For Failover Routing
+#     # PRIMARY (Mumbai)
 #     {
-#       from_port   = 80
-#       to_port     = 80
-#       protocol    = "tcp"
-#       cidr_blocks = ["0.0.0.0/0"]
+#       name            = "@"
+#       type            = "A"
+#       ttl             = 300
+#       records         = ["15.207.111.124"]
+#       set_identifier  = "primary-mumbai"
+#       failover_type   = "PRIMARY"
+#       health_check_id = aws_route53_health_check.primary.id
+#     },
+
+#     # SECONDARY (Singapore)
+#     {
+#       name            = "@"
+#       type            = "A"
+#       ttl             = 300
+#       records         = ["3.110.174.241"]
+#       set_identifier  = "secondary-mumbai"
+#       failover_type   = "SECONDARY"
+#       health_check_id = aws_route53_health_check.secondary.id
+#     },
+#     # For Failover Routing
+
+#     # {
+#     #   name    = "www"
+#     #   type    = "A"
+#     #   ttl     = 300
+#     #   records = [module.ec2.public_ip] # [aws_instance.web.public_ip] 
+#     # },
+#     {
+#       name    = "@"
+#       type    = "TXT"
+#       ttl     = 300
+#       records = ["v=spf1 include:_spf.google.com ~all"]
 #     },
 #     {
-#       from_port   = 443
-#       to_port     = 443
-#       protocol    = "tcp"
-#       cidr_blocks = ["0.0.0.0/0"]
+#       name = "@"
+#       type = "MX"
+#       ttl  = 300
+#       records = [
+#         "1 ASPMX.L.GOOGLE.COM",
+#         "5 ALT1.ASPMX.L.GOOGLE.COM",
+#         "5 ALT2.ASPMX.L.GOOGLE.COM",
+#         "10 ALT3.ASPMX.L.GOOGLE.COM",
+#         "10 ALT4.ASPMX.L.GOOGLE.COM"
+#       ]
 #     },
 #     {
-#       from_port   = 22
-#       to_port     = 22
-#       protocol    = "tcp"
-#       cidr_blocks = ["0.0.0.0/0"] #["YOUR_IP/32"]
+#       name    = "api"
+#       type    = "CNAME"
+#       ttl     = 300
+#       records = ["backend.example.com"]
 #     }
 #   ]
 
 #   tags = {
-#     Client = "spakcommgroup"
+#     Client = "client-a"
 #     Env    = "dev"
 #   }
 # }
 
-# module "ec2" {
-#   source             = "./modules/compute/ec2"
-#   name               = "web-dev"
-#   ami_id             = "ami-02b8269d5e85954ef"
-#   instance_type      = "t3.micro"
-#   subnet_id          = module.vpc.public_subnet_ids[0]
-#   security_group_ids = [module.web_sg.id]
-#   key_name           = "master-key-pair"
+# module "cloudwatch" {
+#   source = "./modules/Management-and-Governance/cloudwatch"
+
+#    providers = {
+#     aws = aws.use1
+#   }
+
+#   log_group_name     = "/aws/route53/spakcommgroup"
+#   retention_in_days = 7
+
 #   tags = {
-#     Client = "spakcommgroup"
+#     Client = "client-a"
 #     Env    = "dev"
 #   }
 # }
+
+# resource "aws_route53_query_log" "this" {
+#   provider = aws.use1
+#   zone_id                 = module.route53.zone_id
+#   cloudwatch_log_group_arn = module.cloudwatch.log_group_arn
+# }
+
+module "web_sg" {
+  source = "./modules/security/sg"
+
+  name   = "web-sg-dev"
+  vpc_id = module.vpc.vpc_id
+
+  ingress_rules = [
+    {
+      from_port   = 80
+      to_port     = 80
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    },
+    {
+      from_port   = 443
+      to_port     = 443
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    },
+    {
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"] #["YOUR_IP/32"]
+    }
+  ]
+
+  tags = {
+    Client = "spakcommgroup"
+    Env    = "dev"
+  }
+}
+
+module "ec2" {
+  source             = "./modules/compute/ec2"
+  name               = "web-dev"
+  ami_id             =  "ami-02b8269d5e85954ef"
+  instance_type      = "t3.small"
+  subnet_id          = module.vpc.public_subnet_ids[0]
+  security_group_ids = [module.web_sg.id]
+  key_name           = "master-key-pair"
+  tags = {
+    Client = "spakcommgroup"
+    Env    = "dev"
+  }
+}
 
 # module "s3_app" {
 #   source        = "./modules/storage/s3"

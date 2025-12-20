@@ -1,0 +1,121 @@
+
+Terraform → EC2-only capabilities
+
+1. EC2 Instances
+
+    Create / update / destroy instances
+    Start/stop via lifecycle replacement
+    Change instance type
+    Attach IAM role
+    Add tags & naming standards
+    User-data (cloud-init / shell)
+
+    Resources
+        aws_instance
+        aws_ami
+        aws_key_pair
+
+
+2. AMIs
+
+    Use custom AMIs
+    Create AMIs from instances
+    Version AMIs via variables
+
+    Resources
+        aws_ami_from_instance
+        aws_ami_copy
+
+
+
+3. Storage (EC2-attached only)
+    
+    Create EBS volumes
+    Attach / detach volumes
+    Resize volumes
+    Snapshot volumes
+
+    Resources
+        aws_ebs_volume
+        aws_volume_attachment
+        aws_ebs_snapshot
+
+
+
+4. Networking (EC2-level)
+
+    Attach Elastic IP
+    Multiple ENIs per instance
+    Private / public IP handling
+
+    Resources
+        aws_eip
+        aws_network_interface
+        aws_network_interface_attachment
+
+
+
+5. Security (EC2 firewall & access)
+
+    Security Groups (inbound/outbound)
+    SSH key management
+    IMDSv2 enforcement
+
+    Resources
+        aws_security_group
+        aws_security_group_rule
+
+
+6. Scaling (EC2 only)
+
+    Launch Templates
+    Auto Scaling Groups
+    Instance refresh
+
+    Resources
+        aws_launch_template
+        aws_autoscaling_group
+
+
+
+7. Placement & Availability
+
+    Availability Zone selection
+    Placement groups (cluster / spread)
+    Tenancy (default / dedicated)
+
+    Resources
+        aws_placement_group
+
+
+
+8. Lifecycle Control
+
+    Prevent destroy
+    Force recreate on change
+    Ignore changes (drift control)
+
+    Terraform features
+        lifecycle {}
+        depends_on
+
+
+
+
+9. Cost Control (EC2 scope)
+
+    Spot instances
+    Mixed instance policies
+    Scheduled scaling
+
+    Resources
+        instance_market_options
+        aws_autoscaling_policy
+
+
+
+10. What Terraform cannot do in EC2
+
+    Start/stop an instance daily
+    Install packages after creation
+    Manage running processes

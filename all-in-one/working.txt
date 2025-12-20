@@ -1,2 +1,2 @@
-terraform destroy -target=module.route53
-terraform apply -target=module.route53
+terraform destroy -target=module.vpc
+terraform apply -target=module.vpc
