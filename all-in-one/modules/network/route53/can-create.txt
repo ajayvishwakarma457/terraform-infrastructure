@@ -37,8 +37,8 @@ Examples:
 
 3. Health Checks
 
-    HTTP / HTTPS / TCP health checks
-    String matching
+    HTTP / HTTPS / TCP health checks (https and tcp pending)
+    String matching (pending)
     Failure thresholds
     CloudWatch alarm–based health checks
     Used for:

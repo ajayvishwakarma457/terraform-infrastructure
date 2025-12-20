@@ -34,12 +34,12 @@ module "route53" {
   records = [
 
     # For Simple Routing
-    {
-      name    = ""
-      type    = "A"
-      ttl     = 300
-      records = ["13.203.208.203"] # [module.ec2.public_ip]
-    },
+    # {
+    #   name    = ""
+    #   type    = "A"
+    #   ttl     = 300
+    #   records = ["13.203.208.203"] # [module.ec2.public_ip]
+    # },
     # For Simple Routing
 
     # For Weighted Routing
@@ -47,7 +47,7 @@ module "route53" {
     #   name           = "@"
     #   type           = "A"
     #   ttl            = 300
-    #   records        = ["13.203.208.203"]
+    #   records        = ["15.207.111.124"]
     #   set_identifier = "instance-1"
     #   weight         = 80
     # },
@@ -114,26 +114,26 @@ module "route53" {
 
     # For Failover Routing
     # PRIMARY (Mumbai)
-    # {
-    #   name            = "@"
-    #   type            = "A"
-    #   ttl             = 300
-    #   records         = ["13.203.208.203"]
-    #   set_identifier  = "primary-mumbai"
-    #   failover_type   = "PRIMARY"
-    #   health_check_id = aws_route53_health_check.primary.id
-    # },
+    {
+      name            = "@"
+      type            = "A"
+      ttl             = 300
+      records         = ["15.207.111.124"]
+      set_identifier  = "primary-mumbai"
+      failover_type   = "PRIMARY"
+      health_check_id = aws_route53_health_check.primary.id
+    },
 
-    # # SECONDARY (Singapore)
-    # {
-    #   name            = "@"
-    #   type            = "A"
-    #   ttl             = 300
-    #   records         = ["18.141.197.30"]
-    #   set_identifier  = "secondary-singapore"
-    #   failover_type   = "SECONDARY"
-    #   health_check_id = aws_route53_health_check.secondary.id
-    # },
+    # SECONDARY (Singapore)
+    {
+      name            = "@"
+      type            = "A"
+      ttl             = 300
+      records         = ["3.110.174.241"]
+      set_identifier  = "secondary-mumbai"
+      failover_type   = "SECONDARY"
+      health_check_id = aws_route53_health_check.secondary.id
+    },
     # For Failover Routing
 
     {
