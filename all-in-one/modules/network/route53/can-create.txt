@@ -40,15 +40,15 @@ Examples:
     HTTP / HTTPS / TCP health checks (https and tcp pending)
     String matching (pending)
     Failure thresholds
-    CloudWatch alarm–based health checks
+    CloudWatch alarm–based health checks (pending)
     Used for:
-    Failover DNS
-    Active-passive setups
+        Failover DNS  
+        Active-passive setups 
 
 
 ================================================================================================================================================================
 
-4. Traffic Policies
+4. Traffic Policies (not used in the industries)
 
     Traffic policy documents
     Traffic policy instances
@@ -57,7 +57,7 @@ Examples:
 
 ================================================================================================================================================================
 
-5. Domain Registration (Limited)
+5. Domain Registration (Limited) (do domain registration for manually)
     Terraform can:
         Register domains
         Manage domain settings (auto-renew, transfer lock)

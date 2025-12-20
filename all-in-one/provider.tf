@@ -5,6 +5,7 @@ provider "aws" {
 
 # Secondary provider for ACM (required by CloudFront → must be us-east-1)
 provider "aws" {
-  alias  = "us_east_1"
+  # alias  = "us_east_1"
+  alias  = "use1"
   region = "us-east-1"
 }

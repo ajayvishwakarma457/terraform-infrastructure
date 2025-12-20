@@ -25,19 +25,19 @@ resource "aws_route53_health_check" "secondary" {
   }
 }
 
-resource "aws_route53_health_check" "primary_string_match" {
-  fqdn              = "spakcommgroup.com"
-  port              = 80
-  type              = "HTTP"
-  resource_path     = "/health"
-  search_string     = "OK"
-  failure_threshold = 3
-  request_interval  = 30
-  tags = {
-    Name = "primary_string_match"
-    Env  = "dev"
-  }
-}
+# resource "aws_route53_health_check" "primary_string_match" {
+#   fqdn              = "spakcommgroup.com"
+#   port              = 80
+#   type              = "HTTP"
+#   resource_path     = "/health"
+#   search_string     = "OK"
+#   failure_threshold = 3
+#   request_interval  = 30
+#   tags = {
+#     Name = "primary_string_match"
+#     Env  = "dev"
+#   }
+# }
 
 resource "aws_route53_health_check" "primary_https" {
   fqdn              = "spakcommgroup.com"
