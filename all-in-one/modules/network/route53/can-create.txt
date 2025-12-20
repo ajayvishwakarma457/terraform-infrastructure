@@ -75,7 +75,7 @@ Examples:
 
 ================================================================================================================================================================
 
-7. Resolver (VPC DNS – important for enterprises)
+7. Resolver (VPC DNS – important for enterprises) (this section is only for premises level not for the web)
 
     Inbound resolver endpoints
     Outbound resolver endpoints
@@ -89,7 +89,7 @@ Used for:
 
 ================================================================================================================================================================
 
-8. DNSSEC
+8. DNSSEC (pending)
     Enable DNSSEC signing
     Manage KMS keys for DNSSEC
     Key signing key (KSK)
