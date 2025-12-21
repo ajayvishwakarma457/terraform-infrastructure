@@ -282,6 +282,18 @@ module "ec2" {
   }
 }
 
+module "elasticip" {
+  source = "./modules/network/elasticip"
+  name = "web-dev-eip"
+  instance_id = module.ec2.instance_id
+  tags = {
+    Project     = "tanvora"
+    Environment = "dev"
+    ManagedBy   = "terraform"
+  }
+}
+
+
 module "s3_app" {
   source        = "./modules/storage/s3"
   bucket_name   = "spakcommgroup-app-dev"
