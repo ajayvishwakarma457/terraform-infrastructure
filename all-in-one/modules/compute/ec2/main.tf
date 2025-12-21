@@ -81,7 +81,7 @@ resource "aws_launch_template" "this" {
 }
 
 
-resource "aws_autoscaling_group" "web_asg" {
+resource "aws_autoscaling_group" "this" {
   desired_capacity = 1
   min_size         = 1
   max_size         = 3
@@ -92,4 +92,14 @@ resource "aws_autoscaling_group" "web_asg" {
     id      = aws_launch_template.this.id
     version = "$Latest"
   }
+
+  instance_refresh {
+    strategy = "Rolling"
+
+    preferences {
+      min_healthy_percentage = 100
+      instance_warmup        = 60
+    }
+  }
+
 }
