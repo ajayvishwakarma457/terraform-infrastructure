@@ -231,7 +231,7 @@ module "web_sg" {
 }
 
 module "ami" {
-  source = "./modules/image/ami"
+  source = "./modules/other/image/ami"
   source_instance_id = module.ec2.instance_id
   name               = "tanvora-web-${var.environment}-v1"
 
