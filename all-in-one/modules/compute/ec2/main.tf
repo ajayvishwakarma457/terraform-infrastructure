@@ -18,5 +18,23 @@ resource "aws_instance" "this" {
   lifecycle {
     prevent_destroy = false   # or false
   }
+}
 
+
+resource "aws_network_interface" "this" {
+  subnet_id       = var.subnet_id
+  security_groups = [var.security_group_ids[0]]  # Attach the first security group
+
+  tags = {
+    Name        = "web-dev-eni-2"
+    Project     = "tanvora"
+    Environment = "dev"
+    ManagedBy   = "terraform"
+  }
+}
+
+resource "aws_network_interface_attachment" "this" {
+  instance_id          = aws_instance.this.id
+  network_interface_id = aws_network_interface.this.id
+  device_index         = 1
 }
