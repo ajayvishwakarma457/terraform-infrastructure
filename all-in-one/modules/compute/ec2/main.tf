@@ -101,5 +101,19 @@ resource "aws_autoscaling_group" "this" {
       instance_warmup        = 60
     }
   }
+}
 
+
+resource "aws_autoscaling_policy" "this" {
+  name                   = "cpu-target-tracking"
+  policy_type            = "TargetTrackingScaling"
+  autoscaling_group_name = aws_autoscaling_group.this.name
+
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+
+    target_value = 50.0
+  }
 }
