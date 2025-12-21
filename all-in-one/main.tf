@@ -17,185 +17,185 @@ module "iam" {
   common_tags  = var.common_tags
 }
 
-# module "acm" {
-#   source                    = "./modules/security/acm"
-#   domain_name               = var.domain_name
-#   subject_alternative_names = ["www.${var.domain_name}"]
-#   zone_id                   = module.route53.zone_id
-#   tags = {
-#     Client = "spakcommgroup"
-#     Env    = "dev"
-#   }
-# }
+module "acm" {
+  source                    = "./modules/security/acm"
+  domain_name               = var.domain_name
+  subject_alternative_names = ["www.${var.domain_name}"]
+  zone_id                   = module.route53.zone_id
+  tags = {
+    Client = "spakcommgroup"
+    Env    = "dev"
+  }
+}
 
-# module "route53" {
-#   source      = "./modules/network/route53"
-#   zone_name   = var.domain_name
-#   create_zone = true
-#   records = [
+module "route53" {
+  source      = "./modules/network/route53"
+  zone_name   = var.domain_name
+  create_zone = true
+  records = [
 
-#     # For Simple Routing
-#     # {
-#     #   name    = ""
-#     #   type    = "A"
-#     #   ttl     = 300
-#     #   records = ["13.203.208.203"] # [module.ec2.public_ip]
-#     # },
-#     # For Simple Routing
+    # For Simple Routing
+    # {
+    #   name    = ""
+    #   type    = "A"
+    #   ttl     = 300
+    #   records = ["13.203.208.203"] # [module.ec2.public_ip]
+    # },
+    # For Simple Routing
 
-#     # For Weighted Routing
-#     # {
-#     #   name           = "@"
-#     #   type           = "A"
-#     #   ttl            = 300
-#     #   records        = ["15.207.111.124"]
-#     #   set_identifier = "instance-1"
-#     #   weight         = 80
-#     # },
-#     # {
-#     #   name           = "@"
-#     #   type           = "A"
-#     #   ttl            = 300
-#     #   records        = ["3.110.174.241"]
-#     #   set_identifier = "instance-2"
-#     #   weight         = 20
-#     # },
-#     # For Weighted Routing
+    # For Weighted Routing
+    # {
+    #   name           = "@"
+    #   type           = "A"
+    #   ttl            = 300
+    #   records        = ["15.207.111.124"]
+    #   set_identifier = "instance-1"
+    #   weight         = 80
+    # },
+    # {
+    #   name           = "@"
+    #   type           = "A"
+    #   ttl            = 300
+    #   records        = ["3.110.174.241"]
+    #   set_identifier = "instance-2"
+    #   weight         = 20
+    # },
+    # For Weighted Routing
 
-#     # For Latency Based Routing
-#     #  {
-#     #     name           = "@"
-#     #     type           = "A"
-#     #     ttl            = 300
-#     #     records        = ["13.203.208.203"]
-#     #     set_identifier = "mumbai"
-#     #     latency_region = "ap-south-1"
-#     #   },
-#     #   {
-#     #     name           = "@"
-#     #     type           = "A"
-#     #     ttl            = 300
-#     #     records        = ["18.141.197.30"]
-#     #     set_identifier = "singapore"
-#     #     latency_region = "ap-southeast-1"
-#     #   },
-#     # For Latency Based Routing
+    # For Latency Based Routing
+    #  {
+    #     name           = "@"
+    #     type           = "A"
+    #     ttl            = 300
+    #     records        = ["13.203.208.203"]
+    #     set_identifier = "mumbai"
+    #     latency_region = "ap-south-1"
+    #   },
+    #   {
+    #     name           = "@"
+    #     type           = "A"
+    #     ttl            = 300
+    #     records        = ["18.141.197.30"]
+    #     set_identifier = "singapore"
+    #     latency_region = "ap-southeast-1"
+    #   },
+    # For Latency Based Routing
 
-#     # For Geolocation Routing
-#     # India users
-#     # {
-#     #   name           = "@"
-#     #   type           = "A"
-#     #   ttl            = 300
-#     #   records        = ["13.203.208.203"]
-#     #   set_identifier = "india"
-#     #   geo_location = {country = "IN"}
-#     # },
+    # For Geolocation Routing
+    # India users
+    # {
+    #   name           = "@"
+    #   type           = "A"
+    #   ttl            = 300
+    #   records        = ["13.203.208.203"]
+    #   set_identifier = "india"
+    #   geo_location = {country = "IN"}
+    # },
 
-#     # # Singapore users
-#     # {
-#     #   name           = "@"
-#     #   type           = "A"
-#     #   ttl            = 300
-#     #   records        = ["18.141.197.30"]
-#     #   set_identifier = "singapore"
-#     #   geo_location = {country = "SG"}
-#     # },
+    # # Singapore users
+    # {
+    #   name           = "@"
+    #   type           = "A"
+    #   ttl            = 300
+    #   records        = ["18.141.197.30"]
+    #   set_identifier = "singapore"
+    #   geo_location = {country = "SG"}
+    # },
 
-#     # # Default (everyone else)
-#     # {
-#     #   name           = "@"
-#     #   type           = "A"
-#     #   ttl            = 300
-#     #   records        = ["3.110.174.241"]
-#     #   set_identifier = "default"
-#     #   geo_location   = {country = "*"}
-#     # },
-#     # For Geolocation Routing
+    # # Default (everyone else)
+    # {
+    #   name           = "@"
+    #   type           = "A"
+    #   ttl            = 300
+    #   records        = ["3.110.174.241"]
+    #   set_identifier = "default"
+    #   geo_location   = {country = "*"}
+    # },
+    # For Geolocation Routing
 
-#     # For Failover Routing
-#     # PRIMARY (Mumbai)
-#     {
-#       name            = "@"
-#       type            = "A"
-#       ttl             = 300
-#       records         = ["15.207.111.124"]
-#       set_identifier  = "primary-mumbai"
-#       failover_type   = "PRIMARY"
-#       health_check_id = aws_route53_health_check.primary.id
-#     },
+    # For Failover Routing
+    # PRIMARY (Mumbai)
+    {
+      name            = "@"
+      type            = "A"
+      ttl             = 300
+      records         = ["15.207.111.124"]
+      set_identifier  = "primary-mumbai"
+      failover_type   = "PRIMARY"
+      health_check_id = aws_route53_health_check.primary.id
+    },
 
-#     # SECONDARY (Singapore)
-#     {
-#       name            = "@"
-#       type            = "A"
-#       ttl             = 300
-#       records         = ["3.110.174.241"]
-#       set_identifier  = "secondary-mumbai"
-#       failover_type   = "SECONDARY"
-#       health_check_id = aws_route53_health_check.secondary.id
-#     },
-#     # For Failover Routing
+    # SECONDARY (Singapore)
+    {
+      name            = "@"
+      type            = "A"
+      ttl             = 300
+      records         = ["3.110.174.241"]
+      set_identifier  = "secondary-mumbai"
+      failover_type   = "SECONDARY"
+      health_check_id = aws_route53_health_check.secondary.id
+    },
+    # For Failover Routing
 
-#     # {
-#     #   name    = "www"
-#     #   type    = "A"
-#     #   ttl     = 300
-#     #   records = [module.ec2.public_ip] # [aws_instance.web.public_ip] 
-#     # },
-#     {
-#       name    = "@"
-#       type    = "TXT"
-#       ttl     = 300
-#       records = ["v=spf1 include:_spf.google.com ~all"]
-#     },
-#     {
-#       name = "@"
-#       type = "MX"
-#       ttl  = 300
-#       records = [
-#         "1 ASPMX.L.GOOGLE.COM",
-#         "5 ALT1.ASPMX.L.GOOGLE.COM",
-#         "5 ALT2.ASPMX.L.GOOGLE.COM",
-#         "10 ALT3.ASPMX.L.GOOGLE.COM",
-#         "10 ALT4.ASPMX.L.GOOGLE.COM"
-#       ]
-#     },
-#     {
-#       name    = "api"
-#       type    = "CNAME"
-#       ttl     = 300
-#       records = ["backend.example.com"]
-#     }
-#   ]
+    # {
+    #   name    = "www"
+    #   type    = "A"
+    #   ttl     = 300
+    #   records = [module.ec2.public_ip] # [aws_instance.web.public_ip] 
+    # },
+    {
+      name    = "@"
+      type    = "TXT"
+      ttl     = 300
+      records = ["v=spf1 include:_spf.google.com ~all"]
+    },
+    {
+      name = "@"
+      type = "MX"
+      ttl  = 300
+      records = [
+        "1 ASPMX.L.GOOGLE.COM",
+        "5 ALT1.ASPMX.L.GOOGLE.COM",
+        "5 ALT2.ASPMX.L.GOOGLE.COM",
+        "10 ALT3.ASPMX.L.GOOGLE.COM",
+        "10 ALT4.ASPMX.L.GOOGLE.COM"
+      ]
+    },
+    {
+      name    = "api"
+      type    = "CNAME"
+      ttl     = 300
+      records = ["backend.example.com"]
+    }
+  ]
 
-#   tags = {
-#     Client = "client-a"
-#     Env    = "dev"
-#   }
-# }
+  tags = {
+    Client = "client-a"
+    Env    = "dev"
+  }
+}
 
-# module "cloudwatch" {
-#   source = "./modules/Management-and-Governance/cloudwatch"
+module "cloudwatch" {
+  source = "./modules/Management-and-Governance/cloudwatch"
 
-#    providers = {
-#     aws = aws.use1
-#   }
+   providers = {
+    aws = aws.use1
+  }
 
-#   log_group_name     = "/aws/route53/spakcommgroup"
-#   retention_in_days = 7
+  log_group_name     = "/aws/route53/spakcommgroup"
+  retention_in_days = 7
 
-#   tags = {
-#     Client = "client-a"
-#     Env    = "dev"
-#   }
-# }
+  tags = {
+    Client = "client-a"
+    Env    = "dev"
+  }
+}
 
-# resource "aws_route53_query_log" "this" {
-#   provider = aws.use1
-#   zone_id                 = module.route53.zone_id
-#   cloudwatch_log_group_arn = module.cloudwatch.log_group_arn
-# }
+resource "aws_route53_query_log" "this" {
+  provider = aws.use1
+  zone_id                 = module.route53.zone_id
+  cloudwatch_log_group_arn = module.cloudwatch.log_group_arn
+}
 
 module "web_sg" {
   source = "./modules/security/sg"
@@ -227,6 +227,19 @@ module "web_sg" {
   tags = {
     Client = "spakcommgroup"
     Env    = "dev"
+  }
+}
+
+module "ebs" {
+  source = "./modules/storage/ebs"
+  availability_zone = var.availability_zones[0]
+  size              = 10
+  name              = "web-dev-data"
+
+  tags = {
+    Project     = "tanvora"
+    Environment = "dev"
+    ManagedBy   = "terraform"
   }
 }
 
@@ -267,50 +280,50 @@ module "ec2" {
   }
 }
 
-# module "s3_app" {
-#   source        = "./modules/storage/s3"
-#   bucket_name   = "spakcommgroup-app-dev"
-#   force_destroy = false
-#   lifecycle_rules = [
-#     {
-#       id              = "logs-archive"
-#       enabled         = true
-#       transitions     = [{ days = 30, storage_class = "STANDARD_IA" }]
-#       expiration_days = 365
-#     }
-#   ]
-#   tags = {
-#     Client = "spakcommgroup"
-#     Env    = "dev"
-#   }
-# }
+module "s3_app" {
+  source        = "./modules/storage/s3"
+  bucket_name   = "spakcommgroup-app-dev"
+  force_destroy = false
+  lifecycle_rules = [
+    {
+      id              = "logs-archive"
+      enabled         = true
+      transitions     = [{ days = 30, storage_class = "STANDARD_IA" }]
+      expiration_days = 365
+    }
+  ]
+  tags = {
+    Client = "spakcommgroup"
+    Env    = "dev"
+  }
+}
 
-# module "lightsail_web" {
-#   source = "./modules/compute/lightsail"
+module "lightsail_web" {
+  source = "./modules/compute/lightsail"
 
-#   name              = "web-dev"
-#   availability_zone = "ap-south-1a"
-#   bundle_id         = "nano_3_1"
-#   create_snapshot   = true
-#   disk_size_gb      = 50
+  name              = "web-dev"
+  availability_zone = "ap-south-1a"
+  bundle_id         = "nano_3_1"
+  create_snapshot   = true
+  disk_size_gb      = 50
 
-#   db_name              = "web-dev-db"
-#   db_blueprint_id      = "mysql_8_0"
-#   db_bundle_id         = "micro_2_0"
-#   master_database_name = "appdb"
-#   db_master_user       = "admin"
-#   db_master_password   = "StrongPassword123!"
+  db_name              = "web-dev-db"
+  db_blueprint_id      = "mysql_8_0"
+  db_bundle_id         = "micro_2_0"
+  master_database_name = "appdb"
+  db_master_user       = "admin"
+  db_master_password   = "StrongPassword123!"
 
-#   service_name    = "web-container-dev"
-#   power           = "micro"
-#   scale           = 1
-#   container_image = "nginx:latest"
+  service_name    = "web-container-dev"
+  power           = "micro"
+  scale           = 1
+  container_image = "nginx:latest"
 
-#   tags = {
-#     Client = "spakcommgroup"
-#     Env    = "dev"
-#   }
-# }
+  tags = {
+    Client = "spakcommgroup"
+    Env    = "dev"
+  }
+}
 
 
 
