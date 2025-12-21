@@ -58,7 +58,7 @@ Terraform → EC2-only capabilities
 5. Security (EC2 firewall & access)
 
     Security Groups (inbound/outbound)
-    SSH key management
+    SSH key management (create manually not using Terraform)
     IMDSv2 enforcement
 
     Resources

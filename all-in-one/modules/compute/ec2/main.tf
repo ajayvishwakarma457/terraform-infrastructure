@@ -18,6 +18,12 @@ resource "aws_instance" "this" {
   lifecycle {
     prevent_destroy = false   # or false
   }
+
+  metadata_options {
+    http_endpoint = "enabled"
+    http_tokens   = "required"   # 👈 this ENFORCES IMDSv2
+  }
+
 }
 
 
