@@ -233,7 +233,7 @@ module "web_sg" {
 module "ebs" {
   source = "./modules/storage/ebs"
   availability_zone = var.availability_zones[0]
-  size              = 10
+  size              = 20
   name              = "web-dev-data"
 
   instance_id = module.ec2.instance_id  
