@@ -23,3 +23,14 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "instance_id" {
+  description = "ID of the EC2 instance to attach the EBS volume to"
+  type        = string
+}
+
+variable "device_name" {
+    description = "Name of the device"
+    type = string
+    default = "/dev/xvdf"
+}

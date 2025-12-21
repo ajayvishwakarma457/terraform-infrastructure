@@ -236,6 +236,8 @@ module "ebs" {
   size              = 10
   name              = "web-dev-data"
 
+  instance_id = module.ec2.instance_id  
+
   tags = {
     Project     = "tanvora"
     Environment = "dev"
