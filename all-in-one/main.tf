@@ -264,7 +264,8 @@ module "ec2" {
   # ami_id = var.ami_versions[var.environment] # for version control
   ami_id             =  "ami-02b8269d5e85954ef"
   instance_type      = "t3.small"
-  subnet_id          = module.vpc.public_subnet_ids[0]
+  # subnet_id          = module.vpc.public_subnet_ids[0]
+  subnet_ids         = module.vpc.public_subnet_ids
   security_group_ids = [module.web_sg.id]
   key_name           = "master-key-pair"
   iam_instance_profile = module.iam.instance_profile_name

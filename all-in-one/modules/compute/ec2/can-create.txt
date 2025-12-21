@@ -66,7 +66,7 @@ Terraform → EC2-only capabilities
         aws_security_group_rule
 
 
-6. Scaling (EC2 only)
+6. Scaling (EC2 only) 
 
     Launch Templates
     Auto Scaling Groups
