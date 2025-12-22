@@ -16,6 +16,10 @@ variable "allocated_storage" {
   type = number
 }
 
+variable "max_allocated_storage" {
+  type = number
+}
+
 variable "db_name" {
   type = string
 }

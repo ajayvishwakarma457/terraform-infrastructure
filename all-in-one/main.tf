@@ -345,6 +345,7 @@ module "rds" {
   identifier          = "prod-mysql-db"
   instance_class      = "db.t3.micro"
   allocated_storage   = 20
+  max_allocated_storage = 100
   db_name             = "appdb"
   username            = "admin"
   password            = var.db_password
