@@ -16,5 +16,5 @@ output "private_subnet_ids" {
 
 output "db_subnet_group_name" {
   value       = aws_db_subnet_group.db.name
-  description = "RDS DB subnet group name"
+  description = "DB subnet group for RDS/Aurora"
 }

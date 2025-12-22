@@ -6,3 +6,4 @@ ami_versions = {
 }
 
 db_password = "StrongPass123!"
+db_resource_id = "db-2IZFDAOZFYOTFVXXASACXFVY3Y"

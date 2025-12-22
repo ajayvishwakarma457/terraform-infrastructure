@@ -98,3 +98,21 @@ resource "aws_iam_instance_profile" "ec2_profile" {
   name = "${var.project_name}-ec2-profile"
   role = aws_iam_role.ec2_role.name
 }
+
+
+data "aws_caller_identity" "current" {}
+
+resource "aws_iam_policy" "rds_iam_auth" {
+  name = "rds-iam-auth-prod"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = "rds-db:connect"
+        Resource = "arn:aws:rds-db:${var.aws_region}:${data.aws_caller_identity.current.account_id}:dbuser:${var.db_resource_id}/*"
+      }
+    ]
+  })
+}

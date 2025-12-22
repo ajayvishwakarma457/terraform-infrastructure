@@ -90,3 +90,7 @@ variable "db_password" {
     error_message = "RDS master password must be at least 8 characters."
   }
 }
+
+variable "db_resource_id" {
+  type = string
+}

@@ -60,3 +60,8 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "iam_database_authentication_enabled" {
+  type = bool
+  default = false
+}

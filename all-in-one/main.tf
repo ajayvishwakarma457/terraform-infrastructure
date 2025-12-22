@@ -15,6 +15,8 @@ module "iam" {
   source       = "./modules/security/iam"
   project_name = var.project_name
   common_tags  = var.common_tags
+  db_resource_id = var.db_resource_id
+  aws_region     = var.aws_region
 }
 
 module "acm" {
@@ -353,6 +355,7 @@ module "rds" {
   db_subnet_group_name = module.vpc.db_subnet_group_name
   security_group_ids   = [module.sg.id]
   multi_az = true
+  iam_database_authentication_enabled = true
 
   tags = {
     Environment = "prod"
