@@ -339,25 +339,25 @@ module "lightsail" {
   }
 }
 
-# module "rds" {
-#   source = "./modules/database/rds"
+module "rds" {
+  source = "./modules/database/rds"
 
-#   identifier          = "prod-mysql-db"
-#   instance_class      = "db.t3.micro"
-#   allocated_storage   = 20
-#   db_name             = "appdb"
-#   username            = "admin"
-#   password            = var.db_password
+  identifier          = "prod-mysql-db"
+  instance_class      = "db.t3.micro"
+  allocated_storage   = 20
+  db_name             = "appdb"
+  username            = "admin"
+  password            = var.db_password
 
-#   db_subnet_group_name = module.vpc.db_subnet_group
-#   security_group_ids   = [module.sg.rds_sg_id]
-#   multi_az = false
+  db_subnet_group_name = module.vpc.db_subnet_group_name
+  security_group_ids   = [module.sg.id]
+  multi_az = false
 
-#   tags = {
-#     Environment = "prod"
-#     Service     = "database"
-#   }
-# }
+  tags = {
+    Environment = "prod"
+    Service     = "database"
+  }
+}
 
 
 

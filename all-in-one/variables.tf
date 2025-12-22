@@ -81,7 +81,12 @@ variable "ami_versions" {
   type        = map(string)
 }
 
-# variable "db_password" {
-#   type      = string
-#   sensitive = true
-# }
+variable "db_password" {
+  type      = string
+  sensitive = true
+
+  validation {
+    condition     = length(var.db_password) >= 8
+    error_message = "RDS master password must be at least 8 characters."
+  }
+}

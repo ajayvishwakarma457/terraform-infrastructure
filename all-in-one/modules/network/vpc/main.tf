@@ -156,4 +156,11 @@ resource "aws_vpc_endpoint" "dynamodb_gateway" {
 }
 
 
+resource "aws_db_subnet_group" "db" {
+  name       = "rds-db-subnet-group"
+  subnet_ids = aws_subnet.private_subnets[*].id
 
+  tags = {
+    Name = "rds-db-subnet-group"
+  }
+}
