@@ -8,6 +8,8 @@ next – alb based scaling (request count)
 next – production sg rules
 
 
-
-
-
+next – https with alb
+next – alb based scaling
+next – lifecycle hooks
+next – production hardening
+next – cost optimization

@@ -78,7 +78,7 @@ Terraform → EC2-only capabilities
 
 
 
-7. Placement & Availability
+7. Placement & Availability (start from here)
 
     Availability Zone selection
     Placement groups (cluster / spread)
