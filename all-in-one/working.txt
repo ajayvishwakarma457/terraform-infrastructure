@@ -2,14 +2,5 @@ terraform destroy -target=module.vpc
 terraform apply -target=module.ec2
 
 
-next – alb health checks deep dive
-next – https (ssl) with alb
-next – alb based scaling (request count)
-next – production sg rules
-
-
-next – https with alb
-next – alb based scaling
-next – lifecycle hooks
-next – production hardening
-next – cost optimization
+in ec2 services we have so manythings to do?
+but what terraform can do list me out that things
