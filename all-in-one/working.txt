@@ -2,5 +2,5 @@ terraform destroy -target=module.vpc
 terraform apply -target=module.ec2
 
 
-in ec2 services we have so manythings to do?
+in rds services we have so manythings to do?
 but what terraform can do list me out that things

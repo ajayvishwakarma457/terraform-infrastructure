@@ -294,7 +294,6 @@ module "elasticip" {
   }
 }
 
-
 module "s3_app" {
   source        = "./modules/storage/s3"
   bucket_name   = "spakcommgroup-app-dev"

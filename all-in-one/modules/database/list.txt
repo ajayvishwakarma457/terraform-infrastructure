@@ -1,0 +1,4 @@
+1) RDS (Postgres/MySQL)
+2) DynamoDB
+3) ElastiCache (Redis)
+4) Aurora

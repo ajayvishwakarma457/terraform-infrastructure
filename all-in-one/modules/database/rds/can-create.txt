@@ -1,0 +1,105 @@
+
+What Terraform CAN DO for RDS (Industry usage)
+
+1. Database Infrastructure
+    Create RDS instances (MySQL, PostgreSQL, MariaDB, Oracle, SQL Server)
+    Create Aurora clusters (Aurora MySQL / PostgreSQL)
+    Set instance size (db.t3.medium, etc.)
+    Allocate storage (gp2 / gp3 / io1)
+    Enable Multi-AZ
+    Set engine version
+    Storage auto-scaling
+
+
+2. Networking & Security
+    Create DB subnet groups
+    Attach VPC
+    Configure security groups
+    Enable / disable public accessibility
+    Configure private-only DB access
+    IAM authentication for DB    
+
+
+3. Authentication & Credentials
+    Create master username/password
+    Store secrets in AWS Secrets Manager
+    Rotate credentials (with Lambda integration)
+    Enable IAM DB authentication
+
+
+4. Backup & Recovery
+    Automated backups (retention period)
+    Backup window
+    Final snapshot on deletion
+    Manual snapshots
+    Restore DB from snapshot
+    Restore DB from point-in-time
+
+
+5. Monitoring & Logging
+    Enable CloudWatch logs (error, slow query, general)
+    Enhanced monitoring
+    Performance Insights
+    Set monitoring intervals
+
+
+6. High Availability & DR
+    Multi-AZ configuration
+    Read replicas
+    Cross-region read replicas
+    Promote replica to primary
+    Aurora reader/writer endpoints
+
+
+7. Maintenance & Patching
+    Maintenance window
+    Auto minor version upgrade
+    Apply changes immediately or during window
+
+
+8. Encryption & Compliance
+    Enable encryption at rest (KMS)
+    Enable encryption in transit (SSL)
+    Customer-managed KMS keys
+    Deletion protection
+    Backup encryption
+
+
+9. Scaling
+    Vertical scaling (instance class change)
+    Storage scaling
+    Aurora auto-scaling (read replicas)
+
+
+10. Tags & Cost Control
+    Add cost allocation tags
+    Environment tags (prod, stage, dev)
+    Ownership & billing tags
+
+
+11. Parameter & Option Management
+    DB parameter groups
+    Custom DB parameters
+    Option groups (Oracle / SQL Server)
+    Apply parameters dynamically
+
+
+12. Replication & Migration
+    Read replicas
+    Blue/Green deployments (limited)
+    Snapshot sharing across accounts
+
+
+
+====================================================================================================================================
+
+Real-World Usage Summary
+
+| Task                  | Tool Used              |
+| --------------------- | ---------------------- |
+| Create RDS infra      | Terraform              |
+| Networking & security | Terraform              |
+| Backup, HA, DR        | Terraform              |
+| DB schema & users     | SQL / Migration tools  |
+| Data operations       | Application            |
+| Performance tuning    | DBA / Monitoring tools |
