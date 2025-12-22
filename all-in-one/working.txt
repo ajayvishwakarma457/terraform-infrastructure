@@ -5,10 +5,3 @@ terraform apply -target=module.ec2
 in rds services we have so manythings to do?
 but what terraform can do list me out that things
 
-2. Networking & Security
-    Create DB subnet groups
-    Attach VPC
-    Configure security groups
-    Enable / disable public accessibility
-    Configure private-only DB access
-    IAM authentication for DB    
