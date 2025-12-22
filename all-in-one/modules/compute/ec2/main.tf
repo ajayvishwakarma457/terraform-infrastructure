@@ -1,12 +1,12 @@
 resource "aws_instance" "this" {
-  ami                    = var.ami_id
-  instance_type          = var.instance_type
-  subnet_id              = var.subnet_ids[0]
-  vpc_security_group_ids = var.security_group_ids
-  key_name               = var.key_name
+  ami                         = var.ami_id
+  instance_type               = var.instance_type
+  subnet_id                   = var.subnet_ids[0]
+  vpc_security_group_ids      = var.security_group_ids
+  key_name                    = var.key_name
   associate_public_ip_address = var.associate_public_ip
-  user_data              = var.user_data != null ? var.user_data : file("${path.module}/modules/compute/ec2/web-dev.sh")
-  iam_instance_profile   = var.iam_instance_profile
+  user_data                   = var.user_data != null ? var.user_data : file("${path.module}/modules/compute/ec2/web-dev.sh")
+  iam_instance_profile        = var.iam_instance_profile
 
   tags = merge(
     var.tags,
@@ -16,20 +16,20 @@ resource "aws_instance" "this" {
   )
 
   lifecycle {
-    prevent_destroy = false   # or false
+    prevent_destroy = false # or false
   }
 
   metadata_options {
     http_endpoint = "enabled"
-    http_tokens   = "required"   # 👈 this ENFORCES IMDSv2
+    http_tokens   = "required" # 👈 this ENFORCES IMDSv2
   }
 
 }
 
 
 resource "aws_network_interface" "this" {
-  subnet_id       = var.subnet_ids[0]  # Attach to the second subnet
-  security_groups = [var.security_group_ids[0]]  # Attach the first security group
+  subnet_id       = var.subnet_ids[0]           # Attach to the second subnet
+  security_groups = [var.security_group_ids[0]] # Attach the first security group
 
   tags = {
     Name        = "web-dev-eni-2"
@@ -52,7 +52,7 @@ resource "aws_ami_from_instance" "this" {
   tags = {
     Name        = "web-dev-asg-v1"
     Environment = "dev"
-    ManagedBy  = "terraform"
+    ManagedBy   = "terraform"
   }
 }
 
@@ -82,6 +82,7 @@ resource "aws_launch_template" "this" {
 
 
 resource "aws_autoscaling_group" "this" {
+  name             = "web-asg"
   desired_capacity = 1
   min_size         = 1
   max_size         = 3
@@ -93,6 +94,10 @@ resource "aws_autoscaling_group" "this" {
     version = "$Latest"
   }
 
+  target_group_arns         = [aws_lb_target_group.this.arn]
+  health_check_type         = "ELB"
+  health_check_grace_period = 120
+
   instance_refresh {
     strategy = "Rolling"
 
@@ -100,6 +105,12 @@ resource "aws_autoscaling_group" "this" {
       min_healthy_percentage = 100
       instance_warmup        = 60
     }
+  }
+
+  tag {
+    key                 = "Name"
+    value               = "web-asg"
+    propagate_at_launch = true
   }
 }
 
@@ -117,3 +128,78 @@ resource "aws_autoscaling_policy" "this" {
     target_value = 50.0
   }
 }
+
+resource "aws_lb_target_group" "this" {
+  name     = "web-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = var.vpc_id
+
+  health_check {
+    path                = "/"
+    protocol            = "HTTP"
+    interval            = 30
+    timeout             = 5
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    matcher             = "200"
+  }
+
+  tags = {
+    Name = "web-tg"
+  }
+}
+
+
+resource "aws_lb" "this" {
+  name               = "web-alb"
+  load_balancer_type = "application"
+  internal           = false
+
+  subnets         = var.subnet_ids
+  security_groups = [var.security_group_ids[0]]
+
+  tags = {
+    Name = "web-alb"
+  }
+}
+
+resource "aws_lb_listener" "this" {
+  load_balancer_arn = aws_lb.this.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.this.arn
+  }
+}
+
+
+# resource "aws_autoscaling_group" "this" {
+#   name = "web-asg"
+
+#   min_size         = 1
+#   max_size         = 3
+#   desired_capacity = 1
+
+#   vpc_zone_identifier = var.subnet_ids
+
+#   launch_template {
+#     id      = aws_launch_template.this.id
+#     version = "$Latest"
+#   }
+
+#   target_group_arns = [
+#     aws_lb_target_group.this.arn
+#   ]
+
+#   health_check_type         = "ELB"
+#   health_check_grace_period = 120
+
+#   tag {
+#     key                 = "Name"
+#     value               = "web-asg"
+#     propagate_at_launch = true
+#   }
+# }

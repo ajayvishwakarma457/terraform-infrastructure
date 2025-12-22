@@ -270,6 +270,7 @@ module "ec2" {
   key_name           = "master-key-pair"
   iam_instance_profile = module.iam.instance_profile_name
   user_data = file("${path.module}/modules/compute/ec2/web-dev.sh")
+  vpc_id = module.vpc.vpc_id
 
   tags = {
     Client = "spakcommgroup"
