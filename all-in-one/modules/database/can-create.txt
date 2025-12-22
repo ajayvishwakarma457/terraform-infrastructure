@@ -22,12 +22,12 @@ What Terraform CAN DO for RDS (Industry usage)
 
 3. Authentication & Credentials
     Create master username/password
-    Store secrets in AWS Secrets Manager (start from here)
-    Rotate credentials (with Lambda integration)
+    Store secrets in AWS Secrets Manager 
+    Rotate credentials (with Lambda integration) (pending)
     Enable IAM DB authentication
 
 
-4. Backup & Recovery
+4. Backup & Recovery (start from here)
     Automated backups (retention period)
     Backup window
     Final snapshot on deletion

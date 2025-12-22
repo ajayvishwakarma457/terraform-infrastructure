@@ -81,6 +81,16 @@ variable "ami_versions" {
   type        = map(string)
 }
 
+variable "db_name" {
+  type = string
+  default = "appdb"
+}
+
+variable "db_username" {
+  type = string
+  default = "admin"
+}
+
 variable "db_password" {
   type      = string
   sensitive = true
@@ -94,3 +104,4 @@ variable "db_password" {
 variable "db_resource_id" {
   type = string
 }
+

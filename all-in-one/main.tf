@@ -326,9 +326,9 @@ module "lightsail" {
   db_name              = "web-dev-db"
   db_blueprint_id      = "mysql_8_0"
   db_bundle_id         = "micro_2_0"
-  master_database_name = "appdb"
-  db_master_user       = "admin"
-  db_master_password   = "StrongPassword123!"
+  master_database_name = var.db_name
+  db_master_user       = var.db_username
+  db_master_password   = var.db_password
 
   service_name    = "web-container-dev"
   power           = "micro"
@@ -348,8 +348,8 @@ module "rds" {
   instance_class      = "db.t3.micro"
   allocated_storage   = 20
   max_allocated_storage = 100
-  db_name             = "appdb"
-  username            = "admin"
+  db_name             = var.db_name
+  username            = var.db_username
   password            = var.db_password
 
   db_subnet_group_name = module.vpc.db_subnet_group_name
@@ -370,8 +370,8 @@ module "aurora" {
   instance_class     = "db.r6g.large"
   instance_count     = 2
 
-  database_name = "appdb"
-  username      = "admin"
+  database_name = var.db_name
+  username      = var.db_username
   password      = var.db_password
 
   db_subnet_group_name = module.vpc.db_subnet_group_name
@@ -380,6 +380,29 @@ module "aurora" {
   tags = {
     Environment = "prod"
     Service     = "aurora"
+  }
+}
+
+
+module "secret" {
+  source = "./modules/security/secret"
+
+  name        = "tanvora/rds/mysql/admin"
+  description = "Admin credentials for prod MySQL RDS"
+
+  secret_value = {
+    username             = var.db_username
+    password             = var.db_password
+    engine               = "mysql"
+    host                 = module.rds.rds_endpoint
+    port                 = 3306
+    dbname               = "appdb"
+    dbInstanceIdentifier = module.rds.rds_id
+  }
+
+  tags = {
+    Environment = "prod"
+    Service     = "database"
   }
 }
 
