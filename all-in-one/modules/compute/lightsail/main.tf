@@ -107,6 +107,9 @@ resource "aws_lightsail_database" "this" {
   master_password      = var.db_master_password
 
   publicly_accessible = false
+  skip_final_snapshot   = false
+  final_snapshot_name   = "${var.db_name}-final"
+
   tags = var.tags
 }
 

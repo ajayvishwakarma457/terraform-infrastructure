@@ -80,3 +80,8 @@ variable "ami_versions" {
   description = "AMI versions per environment"
   type        = map(string)
 }
+
+# variable "db_password" {
+#   type      = string
+#   sensitive = true
+# }

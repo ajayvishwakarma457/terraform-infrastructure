@@ -197,7 +197,7 @@ resource "aws_route53_query_log" "this" {
   cloudwatch_log_group_arn = module.cloudwatch.log_group_arn
 }
 
-module "web_sg" {
+module "sg" {
   source = "./modules/security/sg"
 
   name   = "web-sg-dev"
@@ -266,7 +266,7 @@ module "ec2" {
   instance_type      = "t3.small"
   # subnet_id          = module.vpc.public_subnet_ids[0]
   subnet_ids         = module.vpc.public_subnet_ids
-  security_group_ids = [module.web_sg.id]
+  security_group_ids = [module.sg.id]
   key_name           = "master-key-pair"
   iam_instance_profile = module.iam.instance_profile_name
   user_data = file("${path.module}/modules/compute/ec2/web-dev.sh")
@@ -294,7 +294,7 @@ module "elasticip" {
   }
 }
 
-module "s3_app" {
+module "s3" {
   source        = "./modules/storage/s3"
   bucket_name   = "spakcommgroup-app-dev"
   force_destroy = false
@@ -312,7 +312,7 @@ module "s3_app" {
   }
 }
 
-module "lightsail_web" {
+module "lightsail" {
   source = "./modules/compute/lightsail"
 
   name              = "web-dev"
@@ -338,6 +338,27 @@ module "lightsail_web" {
     Env    = "dev"
   }
 }
+
+# module "rds" {
+#   source = "./modules/database/rds"
+
+#   identifier          = "prod-mysql-db"
+#   instance_class      = "db.t3.micro"
+#   allocated_storage   = 20
+#   db_name             = "appdb"
+#   username            = "admin"
+#   password            = var.db_password
+
+#   db_subnet_group_name = module.vpc.db_subnet_group
+#   security_group_ids   = [module.sg.rds_sg_id]
+#   multi_az = false
+
+#   tags = {
+#     Environment = "prod"
+#     Service     = "database"
+#   }
+# }
+
 
 
 

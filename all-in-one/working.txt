@@ -4,3 +4,5 @@ terraform apply -target=module.ec2
 
 in rds services we have so manythings to do?
 but what terraform can do list me out that things
+
+raform import aws_s3_bucket.terraform_state tanvora-terraform-state-001

@@ -1,0 +1,58 @@
+
+variable "identifier" {
+  type = string
+}
+
+variable "engine_version" {
+  type    = string
+  default = "8.0"
+}
+
+variable "instance_class" {
+  type = string
+}
+
+variable "allocated_storage" {
+  type = number
+}
+
+variable "db_name" {
+  type = string
+}
+
+variable "username" {
+  type = string
+}
+
+variable "password" {
+  type      = string
+  sensitive = true
+}
+
+variable "db_subnet_group_name" {
+  type = string
+}
+
+variable "security_group_ids" {
+  type = list(string)
+}
+
+variable "multi_az" {
+  type    = bool
+  default = false
+}
+
+variable "backup_retention_days" {
+  type    = number
+  default = 7
+}
+
+variable "deletion_protection" {
+  type    = bool
+  default = false
+}
+
+variable "tags" {
+  type    = map(string)
+  default = {}
+}
