@@ -351,7 +351,7 @@ module "rds" {
 
   db_subnet_group_name = module.vpc.db_subnet_group_name
   security_group_ids   = [module.sg.id]
-  multi_az = false
+  multi_az = true
 
   tags = {
     Environment = "prod"
@@ -359,6 +359,25 @@ module "rds" {
   }
 }
 
+module "aurora" {
+  source = "./modules/database/aurora"
+
+  cluster_identifier = "prod-aurora-mysql"
+  instance_class     = "db.r6g.large"
+  instance_count     = 2
+
+  database_name = "appdb"
+  username      = "admin"
+  password      = var.db_password
+
+  db_subnet_group_name = module.vpc.db_subnet_group_name
+  security_group_ids   = [module.sg.id]
+
+  tags = {
+    Environment = "prod"
+    Service     = "aurora"
+  }
+}
 
 
 

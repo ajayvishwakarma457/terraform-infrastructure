@@ -17,6 +17,7 @@ resource "aws_db_instance" "this" {
   vpc_security_group_ids = var.security_group_ids
 
   multi_az            = var.multi_az
+  apply_immediately = true
   publicly_accessible = false
 
   backup_retention_period = var.backup_retention_days
