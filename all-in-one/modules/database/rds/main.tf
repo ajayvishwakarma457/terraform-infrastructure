@@ -23,7 +23,9 @@ resource "aws_db_instance" "this" {
   publicly_accessible = false
 
   backup_retention_period = var.backup_retention_days
-  skip_final_snapshot     = true
+  backup_window = var.backup_window  #"02:00-03:00"
+  skip_final_snapshot     = false
+  final_snapshot_identifier = "${var.identifier}-final"
 
   deletion_protection = var.deletion_protection
 

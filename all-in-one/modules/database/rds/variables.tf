@@ -51,6 +51,11 @@ variable "backup_retention_days" {
   default = 7
 }
 
+variable "backup_window" {
+  type    = string
+  default = "02:00-03:00"
+}
+
 variable "deletion_protection" {
   type    = bool
   default = false

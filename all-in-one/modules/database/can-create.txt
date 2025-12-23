@@ -27,7 +27,7 @@ What Terraform CAN DO for RDS (Industry usage)
     Enable IAM DB authentication
 
 
-4. Backup & Recovery (start from here)
+4. Backup & Recovery 
     Automated backups (retention period)
     Backup window
     Final snapshot on deletion

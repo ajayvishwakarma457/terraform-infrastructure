@@ -16,7 +16,9 @@ resource "aws_rds_cluster" "this" {
 
   storage_encrypted = true
 
-  skip_final_snapshot = true
+  
+  skip_final_snapshot     = false
+  final_snapshot_identifier = "${var.cluster_identifier}-final"
 
   tags = var.tags
 }
