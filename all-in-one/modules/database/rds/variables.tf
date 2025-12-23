@@ -70,3 +70,13 @@ variable "iam_database_authentication_enabled" {
   type = bool
   default = false
 }
+
+variable "restore_from_snapshot" {
+  type    = bool
+  default = false
+}
+
+variable "snapshot_identifier" {
+  type    = string
+  default = null
+}

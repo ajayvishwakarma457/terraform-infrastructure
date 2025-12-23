@@ -356,6 +356,7 @@ module "rds" {
   security_group_ids   = [module.sg.id]
   multi_az = true
   iam_database_authentication_enabled = true
+  restore_from_snapshot = false
 
   tags = {
     Environment = "prod"

@@ -1,3 +1,4 @@
+
 resource "aws_rds_cluster" "this" {
   cluster_identifier = var.cluster_identifier
 
@@ -36,4 +37,14 @@ resource "aws_rds_cluster_instance" "this" {
   publicly_accessible = false
 
   tags = var.tags
+}
+
+resource "aws_rds_cluster" "restore" {
+  cluster_identifier = "aurora-restore-from-snapshot"
+  snapshot_identifier = "aurora-snapshot-id"
+
+  engine = "aurora-mysql"
+
+  db_subnet_group_name   = var.db_subnet_group_name
+  vpc_security_group_ids = var.security_group_ids
 }

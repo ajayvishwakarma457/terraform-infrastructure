@@ -10,6 +10,6 @@ but what terraform can do list me out that things
     Automated backups (retention period)
     Backup window
     Final snapshot on deletion
-    Manual snapshots
+    Manual snapshots (outside terraform have to do manually)
     Restore DB from snapshot
     Restore DB from point-in-time
