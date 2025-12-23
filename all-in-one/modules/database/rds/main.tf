@@ -2,8 +2,11 @@
 
 resource "aws_db_instance" "this" {
 
-   count = var.restore_from_snapshot ? 0 : 1
-
+  count = var.restore_from_snapshot ? 0 : 1
+  # count = (var.restore_from_snapshot || var.restore_from_pitr) ? 0 : 1
+  # count = 1 # Always create unless restoring
+  # count = var.restore_from_snapshot ? 1 : 0 # Disable creation if restoring from snapshot
+  # count = var.restore_from_pitr ? 1 : 0 # Disable creation if restoring from PITR
   identifier = var.identifier
 
   engine         = "mysql"
@@ -54,5 +57,31 @@ resource "aws_db_instance" "restore" {
   tags = {
     Environment = "test"
     Purpose     = "snapshot-restore"
+  }
+}
+
+resource "aws_db_instance" "restore_pitr" {
+  count = var.restore_from_pitr ? 1 : 0
+
+  identifier = "${var.identifier}-restore-pitr"
+
+  restore_to_point_in_time {
+    source_db_instance_identifier = var.identifier
+    restore_time                  = var.pitr_restore_time
+  }
+
+  engine         = "mysql"
+  engine_version = var.engine_version
+  instance_class = var.instance_class
+
+  db_subnet_group_name   = var.db_subnet_group_name
+  vpc_security_group_ids = var.security_group_ids
+
+  publicly_accessible = false
+  skip_final_snapshot = true
+
+  tags = {
+    Environment = "test"
+    Purpose     = "point-in-time-restore"
   }
 }

@@ -80,3 +80,13 @@ variable "snapshot_identifier" {
   type    = string
   default = null
 }
+
+variable "restore_from_pitr" {
+  type    = bool
+  default = false
+}
+
+variable "pitr_restore_time" {
+  type    = string
+  default = null
+}

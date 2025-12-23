@@ -358,6 +358,9 @@ module "rds" {
   iam_database_authentication_enabled = true
   restore_from_snapshot = false
 
+  restore_from_pitr     = false
+  # pitr_restore_time     = "2025-12-20T12:00:00Z"
+
   tags = {
     Environment = "prod"
     Service     = "database"

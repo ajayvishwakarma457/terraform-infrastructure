@@ -33,7 +33,7 @@ What Terraform CAN DO for RDS (Industry usage)
     Final snapshot on deletion
     Manual snapshots
     Restore DB from snapshot
-    Restore DB from point-in-time
+    Restore DB from point-in-time (pending)
 
 
 5. Monitoring & Logging
@@ -50,7 +50,7 @@ What Terraform CAN DO for RDS (Industry usage)
     Promote replica to primary
     Aurora reader/writer endpoints
 
-
+    
 7. Maintenance & Patching
     Maintenance window
     Auto minor version upgrade
