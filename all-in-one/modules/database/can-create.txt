@@ -36,7 +36,7 @@ What Terraform CAN DO for RDS (Industry usage)
     Restore DB from point-in-time (pending)
 
 
-5. Monitoring & Logging
+5. Monitoring & Logging (start from here)
     Enable CloudWatch logs (error, slow query, general)
     Enhanced monitoring
     Performance Insights
