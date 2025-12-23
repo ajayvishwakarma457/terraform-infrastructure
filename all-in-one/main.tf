@@ -388,7 +388,6 @@ module "aurora" {
   }
 }
 
-
 module "secret" {
   source = "./modules/security/secret"
 
@@ -410,6 +409,21 @@ module "secret" {
     Service     = "database"
   }
 }
+
+module "ecr" {
+  source = "./modules/containers/ecr"
+
+  
+  repository_name = "my-app"
+
+  max_images = 5
+
+  tags = {
+    Environment = "dev"
+    Project     = "my-app"
+  }
+}
+
 
 
 

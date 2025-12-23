@@ -1,0 +1,54 @@
+a) Core ECR resources (100% Terraform-managed)
+
+    1) Create / delete ECR repositories
+
+    2) Repository settings
+        image tag mutability (IMMUTABLE / MUTABLE)
+        encryption (AES256 / KMS)
+
+    3) Lifecycle policies
+        expire untagged images
+        keep last N images
+        age-based cleanup
+
+    4) Repository policies
+        cross-account access
+        restrict push/pull
+
+    5) Image scanning configuration
+        scan on push (basic)
+
+    6) Replication configuration
+        cross-region replication rules
+
+    7) Tags on repositories
+
+
+b) Security & access (Terraform-managed)
+
+    1) IAM roles & policies
+        push/pull permissions
+        CI/CD access (GitHub Actions, GitLab, Jenkins)
+
+    2) KMS keys (if using customer-managed encryption)
+    3) VPC endpoints for ECR
+        ecr.api
+        ecr.dkr        
+
+
+c) Registry-level (Terraform-managed)
+
+    ECR registry scanning configuration
+    Registry replication rules
+
+
+d) What Terraform CANNOT do in ECR
+
+❌ Build Docker images
+❌ Push images (docker push)
+❌ Tag images dynamically
+❌ View scan results per image
+❌ Manual console actions
+
+
+
