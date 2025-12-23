@@ -1,9 +1,12 @@
-
+########################################
+# Aurora Cluster (Normal Creation)
+########################################
 resource "aws_rds_cluster" "this" {
-  cluster_identifier = var.cluster_identifier
+  count = var.restore_from_snapshot ? 0 : 1
 
-  engine         = "aurora-mysql"
-  engine_version = var.engine_version
+  cluster_identifier = var.cluster_identifier
+  engine             = "aurora-mysql"
+  engine_version     = var.engine_version
 
   database_name   = var.database_name
   master_username = var.username
@@ -17,34 +20,53 @@ resource "aws_rds_cluster" "this" {
 
   storage_encrypted = true
 
-  
-  skip_final_snapshot     = false
+  skip_final_snapshot       = false
   final_snapshot_identifier = "${var.cluster_identifier}-final"
 
   tags = var.tags
 }
 
-resource "aws_rds_cluster_instance" "this" {
-  count = var.instance_count
+########################################
+# Aurora Cluster (Restore from Snapshot)
+########################################
+resource "aws_rds_cluster" "restore" {
+  count = var.restore_from_snapshot ? 1 : 0
 
-  identifier         = "${var.cluster_identifier}-${count.index + 1}"
-  cluster_identifier = aws_rds_cluster.this.id
+  cluster_identifier  = "${var.cluster_identifier}-restore"
+  snapshot_identifier = var.snapshot_identifier
+  engine              = "aurora-mysql"
 
-  instance_class = var.instance_class
-  engine         = aws_rds_cluster.this.engine
-  engine_version = aws_rds_cluster.this.engine_version
+  master_username = var.username
+  master_password = var.password
 
-  publicly_accessible = false
+  db_subnet_group_name   = var.db_subnet_group_name
+  vpc_security_group_ids = var.security_group_ids
+
+  storage_encrypted = true
 
   tags = var.tags
 }
 
-resource "aws_rds_cluster" "restore" {
-  cluster_identifier = "aurora-restore-from-snapshot"
-  snapshot_identifier = "aurora-snapshot-id"
+########################################
+# Select Active Cluster (CRITICAL PART)
+########################################
+locals {
+  active_cluster_id = var.restore_from_snapshot ? aws_rds_cluster.restore[0].id : aws_rds_cluster.this[0].id
+}
 
-  engine = "aurora-mysql"
+########################################
+# Aurora Cluster Instances
+########################################
+resource "aws_rds_cluster_instance" "this" {
+  count = var.instance_count
 
-  db_subnet_group_name   = var.db_subnet_group_name
-  vpc_security_group_ids = var.security_group_ids
+  identifier         = "${var.cluster_identifier}-${count.index + 1}"
+  cluster_identifier = local.active_cluster_id
+
+  instance_class = var.instance_class
+  engine         = "aurora-mysql"
+
+  publicly_accessible = false
+
+  tags = var.tags
 }

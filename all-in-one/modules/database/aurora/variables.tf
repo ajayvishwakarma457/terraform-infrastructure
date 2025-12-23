@@ -47,3 +47,13 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "restore_from_snapshot" {
+  type    = bool
+  default = false
+}
+
+variable "snapshot_identifier" {
+  type    = string
+  default = null
+}

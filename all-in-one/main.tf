@@ -377,6 +377,7 @@ module "aurora" {
 
   db_subnet_group_name = module.vpc.db_subnet_group_name
   security_group_ids   = [module.sg.id]
+  restore_from_snapshot = true
 
   tags = {
     Environment = "prod"
