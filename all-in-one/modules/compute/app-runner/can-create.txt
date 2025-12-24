@@ -1,0 +1,86 @@
+
+
+1. App Runner service creation
+    Create aws_apprunner_service
+    Define source:
+        Container image (ECR Public / ECR Private)
+        GitHub repo (code → build → deploy)
+    Set service name, port, CPU, memory
+
+
+
+2. Auto deployments
+    Enable/disable auto-deploy on:
+        New image pushed to ECR
+        New commit to GitHub branch
+
+
+
+2. Auto deployments
+    Enable/disable auto-deploy on:
+        New image pushed to ECR
+        New commit to GitHub branch
+
+
+3. Build configuration (GitHub source)
+    Runtime (nodejs, python, java, etc.)
+    Build command
+    Start command
+    Runtime environment variables
+
+
+
+4. Environment variables & secrets
+    Plain env vars
+    Secrets from SSM Parameter Store
+    Secrets from AWS Secrets Manager
+
+
+5. IAM roles
+    Instance role (app → AWS access)
+    Access role (App Runner → ECR / GitHub)
+    Fine-grained IAM policies via Terraform
+
+
+6. Auto scaling
+    Min / max instances
+    Concurrency per instance
+    Scaling configuration resource
+
+
+7. Health checks
+    HTTP path
+    Interval, timeout, healthy/unhealthy threshold
+
+
+8. Networking (VPC integration)
+    VPC connector
+    Subnets
+    Security groups
+    Egress configuration (VPC / public)
+
+
+
+9. Observability
+    CloudWatch logs
+    CloudWatch metrics (enabled automatically, controlled via config)
+    X-Ray not supported (important limit)
+
+
+10. Custom domains
+    Associate domain
+    DNS validation (Route53 record creation)
+    Multiple domains per service
+
+
+
+11. Encryption
+    KMS key for service encryption
+    Customer-managed KMS via Terraform
+
+
+
+12. Tags & lifecycle
+    Tagging
+    Create / update / delete lifecycle
+    Blue-green style replacement via new service
