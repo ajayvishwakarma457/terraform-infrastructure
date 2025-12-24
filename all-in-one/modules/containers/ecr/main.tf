@@ -51,3 +51,18 @@ resource "aws_ecr_lifecycle_policy" "this" {
     ]
   })
 }
+
+data "aws_caller_identity" "current" {}
+
+resource "aws_ecr_replication_configuration" "this" {
+  replication_configuration {
+    rule {
+      destination {
+        region      = "us-east-1"   # target region
+        # registry_id = "606891810694" # same account (change if cross-account)
+        registry_id = data.aws_caller_identity.current.account_id
+      }
+    }
+  }
+}
+

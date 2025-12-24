@@ -9,9 +9,9 @@ a) Core ECR resources (100% Terraform-managed)
     3) Lifecycle policies
         expire untagged images 
         keep last N images
-        age-based cleanup (pendig)
+        age-based cleanup 
 
-    4) Repository policies (pendig)
+    4) Repository policies (pendig: this is manually used when we have many account)
         cross-account access
         restrict push/pull
 
