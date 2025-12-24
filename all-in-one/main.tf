@@ -410,14 +410,23 @@ module "secret" {
   }
 }
 
+module "kms" {
+  source = "./modules/security/kms"
+
+  alias_name = "alias/ecr"
+  tags = {
+    Project     = var.project_name
+    Environment = var.environment
+    ManagedBy   = "terraform"
+  }
+}
+
+
 module "ecr" {
   source = "./modules/containers/ecr"
-
-  
   repository_name = "my-app"
-
   max_images = 5
-
+  kms_key_arn = module.kms.kms_key_arn   # ✅ PASS VALUE
   tags = {
     Environment = "dev"
     Project     = "my-app"
