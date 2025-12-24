@@ -421,6 +421,7 @@ module "ecr" {
   tags = {
     Environment = "dev"
     Project     = "my-app"
+    Owner       = "ajay"
   }
 }
 
