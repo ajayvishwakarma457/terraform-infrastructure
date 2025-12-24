@@ -434,6 +434,12 @@ module "ecr" {
   }
 }
 
-
-
-
+module "app_runner" {
+  source         = "./modules/compute/app-runner"
+  app_name       = "my-app"
+  # image_tag      = "latest"
+  # container_port = 3000
+  ecr_repository_url               = module.ecr.repository_url
+  apprunner_ecr_access_role_arn    = module.iam.apprunner_ecr_access_role_arn
+  image_tag                        = "latest"
+}

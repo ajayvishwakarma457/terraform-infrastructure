@@ -116,7 +116,6 @@ resource "aws_iam_policy" "rds_iam_auth" {
   })
 }
 
-
 resource "aws_iam_policy" "ecr_pull" {
   name = "ecr-pull-policy"
 
@@ -191,3 +190,28 @@ resource "aws_iam_openid_connect_provider" "github" {
   client_id_list = ["sts.amazonaws.com"]
   thumbprint_list = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
 }
+
+resource "aws_iam_role" "apprunner_ecr_access" {
+  name = "apprunner-ecr-access-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Principal = {
+        # Service = "build.apprunner.amazonaws.com"
+        Service = [
+            "build.apprunner.amazonaws.com",
+            "tasks.apprunner.amazonaws.com"
+        ]
+      }
+      Action = "sts:AssumeRole"
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "apprunner_ecr_access" {
+  role       = aws_iam_role.apprunner_ecr_access.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess"
+}
+

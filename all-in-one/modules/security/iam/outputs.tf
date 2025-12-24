@@ -16,3 +16,7 @@ output "ajay_user_name" {
 output "instance_profile_name" {
   value = aws_iam_instance_profile.ec2_profile.name
 }
+
+output "apprunner_ecr_access_role_arn" {
+  value = aws_iam_role.apprunner_ecr_access.arn
+}
