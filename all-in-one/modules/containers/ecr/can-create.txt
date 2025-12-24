@@ -7,18 +7,18 @@ a) Core ECR resources (100% Terraform-managed)
         encryption (AES256 / KMS)
 
     3) Lifecycle policies
-        expire untagged images
+        expire untagged images 
         keep last N images
-        age-based cleanup
+        age-based cleanup (pendig)
 
-    4) Repository policies
+    4) Repository policies (pendig)
         cross-account access
         restrict push/pull
 
     5) Image scanning configuration
         scan on push (basic)
 
-    6) Replication configuration
+    6) Replication configuration (pendig)
         cross-region replication rules
 
     7) Tags on repositories

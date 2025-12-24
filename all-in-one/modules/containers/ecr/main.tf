@@ -25,9 +25,24 @@ resource "aws_ecr_lifecycle_policy" "this" {
         rulePriority = 1
         description  = "Keep last ${var.max_images} images"
         selection = {
-          tagStatus   = "any"
+          # tagStatus   = "any"
+          tagStatus   = "untagged"
           countType   = "imageCountMoreThan"
           countNumber = var.max_images
+        }
+        action = {
+          type = "expire"
+        }
+      }, 
+      {
+        rulePriority = 2
+        description  = "Expire tagged images older than 30 days"
+        selection = {
+          tagStatus   = "tagged"
+          tagPrefixList = ["v"] # Required when tagStatus is "untagged"
+          countType   = "sinceImagePushed"
+          countUnit   = "days"
+          countNumber = 30
         }
         action = {
           type = "expire"
