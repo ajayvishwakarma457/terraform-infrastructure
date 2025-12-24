@@ -31,7 +31,7 @@ b) Security & access (Terraform-managed)
         CI/CD access (GitHub Actions, GitLab, Jenkins)
 
     2) KMS keys (if using customer-managed encryption)
-    3) VPC endpoints for ECR
+    3) VPC endpoints for ECR (pending)
         ecr.api
         ecr.dkr        
 
