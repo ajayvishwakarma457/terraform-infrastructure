@@ -11,10 +11,10 @@
 2. Auto deployments
     Enable/disable auto-deploy on:
         New image pushed to ECR
-        New commit to GitHub branch
+        New commit to GitHub branch (pending)
 
 
-3. Build configuration (GitHub source)
+3. Build configuration (GitHub source) (this is not used when you are using ecr and this is not industry standard)
     Runtime (nodejs, python, java, etc.)
     Build command
     Start command
@@ -22,9 +22,9 @@
 
 
 4. Environment variables & secrets
-    Plain env vars
-    Secrets from SSM Parameter Store
-    Secrets from AWS Secrets Manager
+    Plain env vars (ignore)
+    Secrets from SSM Parameter Store (ignore)
+    Secrets from AWS Secrets Manager 
 
 
 5. IAM roles
