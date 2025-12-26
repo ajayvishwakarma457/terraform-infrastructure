@@ -442,5 +442,5 @@ module "app_runner" {
   # container_port = 3000
   ecr_repository_url               = module.ecr.repository_url
   apprunner_ecr_access_role_arn    = module.iam.apprunner_ecr_access_role_arn
-  image_tag                        = "v1"
+  image_tag                        = "v4"
 }

@@ -5,3 +5,9 @@ docker build -t my-app . (normal platform)
 docker buildx build --platform linux/amd64 -t my-app:latest --load . (multi platform)
 docker tag my-app:latest 606891810694.dkr.ecr.ap-south-1.amazonaws.com/my-app:latest
 docker push 606891810694.dkr.ecr.ap-south-1.amazonaws.com/my-app:latest
+
+
+new version
+docker buildx build --platform linux/amd64 -t my-app:v3 --load .
+docker tag my-app:v3 606891810694.dkr.ecr.ap-south-1.amazonaws.com/my-app:v3
+docker push 606891810694.dkr.ecr.ap-south-1.amazonaws.com/my-app:v3
