@@ -5,13 +5,13 @@ resource "aws_apprunner_service" "this" {
 
   source_configuration {
     authentication_configuration {
-    #   access_role_arn = aws_iam_role.apprunner_ecr_access.arn
+      #access_role_arn = aws_iam_role.apprunner_ecr_access.arn
       access_role_arn = var.apprunner_ecr_access_role_arn
     }
 
     image_repository {
       image_repository_type = "ECR"
-    #   image_identifier = "${module.ecr.repository_url}:${var.image_tag}"
+      #image_identifier = "${module.ecr.repository_url}:${var.image_tag}"
       image_identifier = "${var.ecr_repository_url}:${var.image_tag}"
 
       image_configuration {
@@ -30,11 +30,11 @@ resource "aws_apprunner_service" "this" {
 
   health_check_configuration {
     protocol            = "HTTP"
-    path                = "/"
-    interval            = 10
-    timeout             = 5
+    path                = "/health"
+    interval            = 20
+    timeout             = 10
     healthy_threshold   = 1
-    unhealthy_threshold = 5
+    unhealthy_threshold = 10
   }
 
   tags = {

@@ -5,11 +5,6 @@ terraform apply -target=module.ec2
 in rds services we have so manythings to do?
 but what terraform can do list me out that things
 
-
-4. Backup & Recovery 
-    Automated backups (retention period)
-    Backup window
-    Final snapshot on deletion
-    Manual snapshots (outside terraform have to do manually)
-    Restore DB from snapshot
-    Restore DB from point-in-time
+aws ecr list-images \
+  --repository-name my-app \     
+  --region ap-south-1
