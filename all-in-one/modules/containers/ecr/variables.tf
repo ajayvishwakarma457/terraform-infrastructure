@@ -44,3 +44,4 @@ variable "kms_key_arn" {
   description = "KMS key ARN for ECR encryption"
   default     = null
 }
+

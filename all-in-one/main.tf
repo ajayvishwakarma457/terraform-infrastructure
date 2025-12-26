@@ -427,6 +427,7 @@ module "ecr" {
   repository_name = "my-app"
   max_images = 5
   kms_key_arn = module.kms.kms_key_arn   # ✅ PASS VALUE
+  image_tag_mutability = "MUTABLE"
   tags = {
     Environment = "dev"
     Project     = "my-app"
@@ -441,5 +442,5 @@ module "app_runner" {
   # container_port = 3000
   ecr_repository_url               = module.ecr.repository_url
   apprunner_ecr_access_role_arn    = module.iam.apprunner_ecr_access_role_arn
-  image_tag                        = "latest"
+  image_tag                        = "v1"
 }
