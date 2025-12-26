@@ -8,14 +8,6 @@
     Set service name, port, CPU, memory
 
 
-
-2. Auto deployments
-    Enable/disable auto-deploy on:
-        New image pushed to ECR
-        New commit to GitHub branch
-
-
-
 2. Auto deployments
     Enable/disable auto-deploy on:
         New image pushed to ECR
@@ -27,7 +19,6 @@
     Build command
     Start command
     Runtime environment variables
-
 
 
 4. Environment variables & secrets
