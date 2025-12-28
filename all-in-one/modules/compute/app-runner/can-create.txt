@@ -51,25 +51,24 @@
     Egress configuration (VPC / public)
 
 
-
-9. Observability
+9. Observability (pending)
     CloudWatch logs
     CloudWatch metrics (enabled automatically, controlled via config)
     X-Ray not supported (important limit)
 
 
-10. Custom domains
+10. Custom domains (pending)
     Associate domain
     DNS validation (Route53 record creation)
     Multiple domains per service
 
 
-11. Encryption
+11. Encryption (pending)
     KMS key for service encryption
     Customer-managed KMS via Terraform
 
 
-12. Tags & lifecycle
+12. Tags & lifecycle (pending)
     Tagging
     Create / update / delete lifecycle
     Blue-green style replacement via new service
