@@ -11,7 +11,7 @@
 2. Auto deployments
     Enable/disable auto-deploy on:
         New image pushed to ECR
-        New commit to GitHub branch (pending)
+        New commit to GitHub branch (not recommended)
 
 
 3. Build configuration (GitHub source) (this is not used when you are using ecr and this is not industry standard)
@@ -21,13 +21,13 @@
     Runtime environment variables
 
 
-4. Environment variables & secrets
+4. Environment variables & secrets 
     Plain env vars (ignore)
     Secrets from SSM Parameter Store (ignore)
-    Secrets from AWS Secrets Manager 
+    Secrets from AWS Secrets Manager (pending) 
 
 
-5. IAM roles
+5. IAM roles (pending)
     Instance role (app → AWS access)
     Access role (App Runner → ECR / GitHub)
     Fine-grained IAM policies via Terraform

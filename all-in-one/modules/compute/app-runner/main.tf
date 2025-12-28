@@ -2,6 +2,7 @@
 
 resource "aws_apprunner_service" "this" {
   service_name = var.app_name
+  auto_scaling_configuration_arn = aws_apprunner_auto_scaling_configuration_version.this.arn
 
   source_configuration {
     authentication_configuration {
@@ -42,4 +43,10 @@ resource "aws_apprunner_service" "this" {
   }
 }
 
+resource "aws_apprunner_auto_scaling_configuration_version" "this" {
+  auto_scaling_configuration_name = "${var.app_name}-scaling"
+  min_size        = 1
+  max_size        = 5
+  max_concurrency = 50
+}
 
