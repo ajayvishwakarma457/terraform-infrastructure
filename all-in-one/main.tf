@@ -223,7 +223,13 @@ module "sg" {
       to_port     = 22
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"] #["YOUR_IP/32"]
-    }
+    },
+    {
+      from_port   = 3000
+      to_port     = 3000
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    } 
   ]
 
   tags = {
@@ -443,4 +449,22 @@ module "app_runner" {
   ecr_repository_url               = module.ecr.repository_url
   apprunner_ecr_access_role_arn    = module.iam.apprunner_ecr_access_role_arn
   image_tag                        = "v4"
+}
+
+module "ecs" {
+  source = "./modules/compute/ecs"
+
+  aws_region        = var.aws_region
+  cluster_name      = "app-cluster"
+  service_name      = "app-service"
+
+  container_image   = module.ecr.repository_url   # SAME ECR USED BY APP RUNNER
+  container_port    = 3000
+
+  # subnet_ids        = module.vpc.private_subnet_ids # for production
+  subnet_ids        = module.vpc.public_subnet_ids
+  security_group_ids = [module.sg.id]
+  assign_public_ip = true
+
+  desired_count = 1
 }

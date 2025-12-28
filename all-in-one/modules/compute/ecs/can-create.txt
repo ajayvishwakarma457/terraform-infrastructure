@@ -6,7 +6,6 @@ Core ECS
     Cluster settings (container insights)
 
 
-
 Task & Container
     Task Definition
         Container images
