@@ -1,0 +1,82 @@
+
+
+Core ECS
+    Amazon Elastic Container Service Cluster
+    Capacity providers (EC2 / AWS Fargate)
+    Cluster settings (container insights)
+
+
+
+Task & Container
+    Task Definition
+        Container images
+        CPU / memory
+        Port mappings
+        Env variables
+        Secrets (from SSM / Secrets Manager)
+        Logging config
+    Execution role & task role (IAM)
+
+
+
+Service Layer
+    ECS Service
+    Desired count
+    Deployment strategy (rolling / blue-green)
+    Auto-healing
+    Placement strategy & constraints
+
+
+
+Compute
+    Fargate profiles
+    EC2 launch templates
+    Auto Scaling Groups (for ECS on EC2)
+
+
+
+Networking
+    VPC, subnets
+    Security groups
+    ENIs (awsvpc mode)
+    Public / private networking
+
+
+
+Load Balancing
+    Application Load Balancer
+    Target groups
+    Listener rules
+    Service ↔ target group attachment
+
+
+
+Auto Scaling
+    Service auto scaling
+    CPU / memory based scaling
+    Custom CloudWatch metrics
+
+
+Images & Registry
+    Amazon ECR repositories
+    Lifecycle policies
+    Repo permissions
+
+
+Observability
+    Amazon CloudWatch logs
+    Log groups
+    Metrics & alarms
+
+
+Security
+    IAM roles & policies
+    Secrets injection
+    Task-level permissions
+    Security groups
+
+
+CI/CD (Infra part only)
+    Hooks for CodeDeploy (blue/green)
+    IAM roles for pipelines
+    ECS service deployment configs
