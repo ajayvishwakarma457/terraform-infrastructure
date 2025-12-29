@@ -452,7 +452,7 @@ module "app_runner" {
 }
 
 module "ecs" {
-  source = "./modules/compute/ecs"
+  source = "./modules/containers/ecs"
 
   aws_region        = var.aws_region
   cluster_name      = "app-cluster"
