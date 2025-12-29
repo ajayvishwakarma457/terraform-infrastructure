@@ -5,5 +5,28 @@ terraform apply -target=module.ec2
 in rds services we have so manythings to do?
 but what terraform can do list me out that things
 
-1. Capacity providers (explicit configuration)
-2. Cluster settings – Container Insights
+1. Secrets integration (SSM / Secrets Manager)
+2. Proper environment variable strategy
+3. Separate task role vs execution role
+
+
+
+
+Secrets Manager
+     ↓
+IAM Task Role (permission)
+     ↓
+ECS Task Definition
+     ↓
+Container ENV at runtime
+
+
+aws ecs execute-command \
+  --cluster app-cluster \
+  --task 54f6ba0ffd564c25846dbb141b2c3b1e \
+  --container app-service \
+  --interactive \
+  --command "/bin/sh"
+
+
+  echo $DB_PASSWORD

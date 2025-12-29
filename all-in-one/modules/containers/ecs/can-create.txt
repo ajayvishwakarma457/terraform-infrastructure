@@ -12,7 +12,7 @@ Task & Container
         CPU / memory
         Port mappings
         Env variables
-        Secrets (from SSM / Secrets Manager)
+        Secrets (from SSM / Secrets Manager) 
         Logging config
     Execution role & task role (IAM)
 

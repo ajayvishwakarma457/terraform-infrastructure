@@ -41,3 +41,19 @@ variable "assign_public_ip" {
   type        = bool
   default     = false
 }
+
+variable "secret_arn" {
+  type = string
+}
+
+variable "execution_role_arn" {
+  type        = string
+  description = "ECS execution role ARN"
+}
+
+variable "task_role_arn" {
+  type        = string
+  description = "ECS task role ARN"
+}
+
+

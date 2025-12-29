@@ -40,8 +40,12 @@ resource "aws_ecs_task_definition" "this" {
   network_mode             = "awsvpc"
   cpu                      = var.cpu
   memory                   = var.memory
-  execution_role_arn       = aws_iam_role.execution.arn
-  task_role_arn            = aws_iam_role.execution.arn
+
+  # execution_role_arn       = aws_iam_role.execution.arn
+  # task_role_arn            = aws_iam_role.execution.arn
+
+  execution_role_arn       = var.execution_role_arn
+  task_role_arn            = var.task_role_arn
 
   container_definitions = jsonencode([
     {
@@ -53,6 +57,13 @@ resource "aws_ecs_task_definition" "this" {
         containerPort = var.container_port
         protocol      = "tcp"
       }]
+
+       secrets = [
+        {
+          name      = "DB_PASSWORD"
+          valueFrom = "${var.secret_arn}:password::"
+        }
+      ]
 
       logConfiguration = {
         logDriver = "awslogs"
@@ -72,6 +83,8 @@ resource "aws_ecs_service" "this" {
   cluster         = aws_ecs_cluster.this.id
   task_definition = aws_ecs_task_definition.this.arn
   desired_count   = var.desired_count
+
+  enable_execute_command = true
 
   # launch_type     = "FARGATE"
 

@@ -17,6 +17,7 @@ module "iam" {
   common_tags  = var.common_tags
   db_resource_id = var.db_resource_id
   aws_region     = var.aws_region
+  secret_arn = module.secret.secret_arn
 }
 
 module "acm" {
@@ -257,7 +258,7 @@ module "ami" {
   source = "./modules/other/image/ami"
   source_instance_id = module.ec2.instance_id
   name               = "tanvora-web-${var.environment}-v1"
-
+  
   tags = {
     Project     = "tanvora"
     Environment = var.environment
@@ -396,10 +397,10 @@ module "aurora" {
 
 module "secret" {
   source = "./modules/security/secret"
-
   name        = "tanvora/rds/mysql/admin"
   description = "Admin credentials for prod MySQL RDS"
 
+  # for RDS
   secret_value = {
     username             = var.db_username
     password             = var.db_password
@@ -451,6 +452,23 @@ module "app_runner" {
   image_tag                        = "v4"
 }
 
+
+module "secret_ecs" {
+  source = "./modules/security/secret"
+  name        = "tanvora/ecs/app"
+  description = "Secrets for ECS Node application"
+
+  # for ecs
+  secret_value = {
+    DB_PASSWORD = var.db_password
+  }
+
+  tags = {
+    Environment = "prod"
+    Service     = "ecs"
+  }
+}
+
 module "ecs" {
   source = "./modules/containers/ecs"
 
@@ -465,6 +483,11 @@ module "ecs" {
   subnet_ids        = module.vpc.public_subnet_ids
   security_group_ids = [module.sg.id]
   assign_public_ip = true
+
+  execution_role_arn = module.iam.ecs_execution_role_arn
+  task_role_arn      = module.iam.ecs_task_role_arn
+
+  secret_arn = module.secret_ecs.secret_arn
 
   desired_count = 1
 }

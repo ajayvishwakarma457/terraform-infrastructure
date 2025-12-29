@@ -15,3 +15,8 @@ variable "db_resource_id" {
 variable "aws_region" {
   type = string
 }
+
+variable "secret_arn" {
+  type        = string
+  description = "Secrets Manager ARN for ECS task role"
+}
