@@ -182,7 +182,7 @@ module "route53" {
 }
 
 module "cloudwatch" {
-  source = "./modules/Management-and-Governance/cloudwatch"
+  source = "./modules/management-and-governance/cloudwatch"
 
    providers = {
     aws = aws.use1
