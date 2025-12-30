@@ -5,9 +5,7 @@ terraform apply -target=module.ec2
 in rds services we have so manythings to do?
 but what terraform can do list me out that things
 
-1. Secrets integration (SSM / Secrets Manager)
-2. Proper environment variable strategy
-3. Separate task role vs execution role
+
 
 
 
