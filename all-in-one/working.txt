@@ -5,28 +5,28 @@ terraform apply -target=module.ec2
 in rds services we have so manythings to do?
 but what terraform can do list me out that things
 
-
-     1. CPU / memory (explicit values)
-     2. Logging config (CloudWatch logs)
-
+# command     = ["CMD-SHELL", "curl -f http://localhost:3000/ || exit 1"]
+# command     = ["CMD-SHELL", "node -e \"require('http').get('http://localhost:3000', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))\""]
 
 
-
-Secrets Manager
-     ↓
-IAM Task Role (permission)
-     ↓
-ECS Task Definition
-     ↓
-Container ENV at runtime
+3) Deployment strategy (rolling / blue-green)
+     You are currently on default rolling
+     No explicit:
+          deployment_controller
+          deployment_configuration
+          Blue/Green (CodeDeploy) setup
 
 
-aws ecs execute-command \
-  --cluster app-cluster \
-  --task 54f6ba0ffd564c25846dbb141b2c3b1e \
-  --container app-service \
-  --interactive \
-  --command "/bin/sh"
+4) Auto-healing
+     No explicit health checks tied to:
+          ALB target group (preferred)
+          or container health check          
+     ECS is restarting tasks, but no defined health model
 
 
-  echo $DB_PASSWORD
+5) Placement strategy & constraints
+     No:
+          placement strategy
+          placement constraints
+
+

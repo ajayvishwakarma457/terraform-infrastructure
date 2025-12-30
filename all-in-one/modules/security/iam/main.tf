@@ -231,7 +231,8 @@ resource "aws_iam_policy" "ecs_secrets" {
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_secrets" {
-  role       = aws_iam_role.ecs_task_role.name
+  # role       = aws_iam_role.ecs_task_role.name
+  role       = aws_iam_role.ecs_execution_role.name
   policy_arn = aws_iam_policy.ecs_secrets.arn
 }
 
@@ -265,7 +266,7 @@ resource "aws_iam_role" "ecs_task_role" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "execution" {
-  role       = aws_iam_role.ecs_execution_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
+# resource "aws_iam_role_policy_attachment" "execution" {
+#   role       = aws_iam_role.ecs_execution_role.name
+#   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+# }

@@ -12,6 +12,9 @@ resource "aws_ecs_cluster" "this" {
 resource "aws_cloudwatch_log_group" "this" {
   name              = "/ecs/${var.service_name}"
   retention_in_days = 7
+    lifecycle {
+    ignore_changes = [name]
+  }
 }
 
 # IAM role for ECS task execution (pull image, write logs)
@@ -76,6 +79,15 @@ resource "aws_ecs_task_definition" "this" {
           awslogs-stream-prefix = "ecs"
         }
       }
+
+    # AUTO-HEALING CONFIG
+      healthCheck = {
+        command = ["CMD-SHELL","node -e \"require('http').get('http://localhost:3000', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))\""]
+        interval    = 30
+        timeout     = 5
+        retries     = 3
+        startPeriod = 60
+      }
     }
   ])
 }
@@ -88,8 +100,16 @@ resource "aws_ecs_service" "this" {
   desired_count   = var.desired_count
 
   enable_execute_command = true
-
   # launch_type     = "FARGATE"
+
+  deployment_controller {
+    type = "ECS"
+  }
+
+  
+  deployment_minimum_healthy_percent = 50
+  deployment_maximum_percent         = 200
+
 
   capacity_provider_strategy {
     capacity_provider = "FARGATE"
@@ -117,7 +137,4 @@ resource "aws_ecs_service" "this" {
 }
 
 
-resource "aws_cloudwatch_log_group" "ecs" {
-  name              = "/ecs/${var.service_name}"
-  retention_in_days = 14
-}
+
