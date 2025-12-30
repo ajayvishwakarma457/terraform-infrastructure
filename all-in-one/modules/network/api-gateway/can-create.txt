@@ -1,0 +1,77 @@
+
+Terraform can manage these parts of AWS API Gateway (REST / HTTP / WebSocket):
+
+    API & Protocol
+        Create API (REST, HTTP, WebSocket)
+        API name, description
+        Endpoint type (EDGE / REGIONAL / PRIVATE)
+
+    Resources & Routes
+        REST: resources (/users, /orders/{id})
+        REST: methods (GET, POST, PUT, DELETE)
+        HTTP API: routes (GET /users)
+        WebSocket: routes ($connect, $disconnect, custom)
+
+
+    Integrations (Backend wiring)
+        Lambda integration
+        HTTP/HTTPS backend
+        ALB / NLB (via VPC Link)
+        Mock integration
+        Integration request/response mapping
+
+    Authorization & Security
+        IAM authorization
+        Lambda Authorizer
+        Cognito User Pool Authorizer
+        API keys
+        Usage plans (rate limit, quota)
+        Resource policies (IP allow/deny, VPC-only access)
+
+    Stages & Deployments
+        Deployment versions
+        Stages (dev, staging, prod)
+        Stage variables
+        Auto-deploy (HTTP API)
+
+
+    Throttling & Limits
+        Per-stage throttling
+        Per-method throttling
+        Burst & rate limits
+
+    Custom Domain & TLS
+        Custom domain name
+        ACM certificate attachment
+        Base path mapping
+        Route53 DNS record
+
+    Logging & Monitoring
+        CloudWatch log groups
+        Access logs
+        Execution logs
+        X-Ray tracing
+
+    CORS
+        CORS configuration
+        Preflight OPTIONS setup
+
+
+    VPC Connectivity
+        VPC Link
+        Private API Gateway
+        Interface VPC Endpoints
+
+    WebSocket–specific
+        Route selection expression
+        Connection management
+        Integration per route
+
+    Outputs & Automation
+        API invoke URL
+        Stage URL
+        Deployment automation via CI/CD
+
+    Bottom line:
+        Terraform handles infra, config, security, routing, scaling rules, domains, logs.
+        It does not manage your backend logic (Lambda code, app behavior).
