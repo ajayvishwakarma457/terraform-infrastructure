@@ -17,8 +17,11 @@ module "iam" {
   common_tags  = var.common_tags
   db_resource_id = var.db_resource_id
   aws_region     = var.aws_region
-  secret_arn = module.secret.secret_arn
+  # secret_arn = module.secret.secret_arn
+  secret_arn = module.secret_ecs.secret_arn # for ecs module
 }
+
+
 
 module "acm" {
   source                    = "./modules/security/acm"
@@ -486,7 +489,6 @@ module "ecs" {
 
   execution_role_arn = module.iam.ecs_execution_role_arn
   task_role_arn      = module.iam.ecs_task_role_arn
-
   secret_arn = module.secret_ecs.secret_arn
 
   desired_count = 1
