@@ -6,6 +6,8 @@ in rds services we have so manythings to do?
 but what terraform can do list me out that things
 
 
+     1. CPU / memory (explicit values)
+     2. Logging config (CloudWatch logs)
 
 
 

@@ -479,6 +479,9 @@ module "ecs" {
   cluster_name      = "app-cluster"
   service_name      = "app-service"
 
+  cpu = 256
+  memory = 512
+
   container_image   = module.ecr.repository_url   # SAME ECR USED BY APP RUNNER
   container_port    = 3000
 

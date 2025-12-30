@@ -53,6 +53,9 @@ resource "aws_ecs_task_definition" "this" {
       image     = var.container_image   # EXISTING ECR IMAGE
       essential = true
 
+      cpu    = var.cpu
+      memory = var.memory
+
       portMappings = [{
         containerPort = var.container_port
         protocol      = "tcp"
