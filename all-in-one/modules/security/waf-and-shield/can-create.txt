@@ -1,0 +1,105 @@
+
+AWS WAF — Terraform can do
+
+    1. Web ACL
+        Create / update / delete Web ACL
+        Scope: REGIONAL (ALB, API Gateway) or CLOUDFRONT
+        Default allow / block action
+
+    2. Rules
+        Create custom rules:
+            IP allow/block
+            Geo blocking
+            Rate limiting
+            Header / query / body match
+            Regex pattern match
+
+        Rule priority control
+        Action per rule (allow, block, count)
+
+
+    3. Managed Rule Groups
+        Attach AWS managed rules:
+            CommonRuleSet
+            SQLi    
+            XSS 
+            Bot Control
+
+        Attach third-party managed rules
+        Override rule actions
+
+
+    4. IP Sets
+        Create IP allowlists / blocklists
+        IPv4 / IPv6
+        Reusable across rules
+
+
+    5. Regex Pattern Sets
+        Central regex definitions
+        Reuse across multiple rules
+
+    
+    6. Web ACL Association
+        Attach WAF to:
+            Application Load Balancer
+            API Gateway
+            App Runner
+            CloudFront (via global scope)
+
+    
+    7. Logging
+        Enable WAF logs
+
+        Send logs to:
+            CloudWatch Logs
+            S3
+            Kinesis Firehose
+
+        Redact sensitive fields
+
+    
+    8. Visibility & Metrics
+        Enable CloudWatch metrics
+        Enable sampled requests
+        Custom metric names per rule
+
+
+
+
+========================================================================================================================================================================
+
+
+
+AWS Shield — Terraform can do
+
+    1. Shield Advanced
+        Enable Shield Advanced subscription
+        Associate protected resources:
+            ALB
+            CloudFront
+            Elastic IP
+            Route 53 hosted zone
+
+    
+    2. Resource Protection
+        Explicitly protect each resource
+        Add / remove protected resources
+
+
+    3. DDoS Response Team (DRT) Access
+        Grant AWS DRT permission
+        IAM role association
+
+
+    4. Proactive Engagement (Advanced)
+        Configure contact info
+        Enable proactive notifications
+
+
+    5. Health-based Detection (Limited)
+        Associate Route 53 health checks
+
+
+
+
