@@ -1,0 +1,78 @@
+
+Amazon SQS — what Terraform can manage (straight list)
+
+    Queue creation & type
+        Create Standard queues
+        Create FIFO queues
+        Set queue name, FIFO suffix, content-based deduplication
+
+    
+    Core queue settings
+        visibility_timeout_seconds
+        message_retention_seconds
+        delay_seconds
+        receive_wait_time_seconds (long polling)
+        maximum_message_size
+
+    Dead-Letter Queues (DLQ)
+        Create DLQ queues
+        Attach DLQ to main queue
+        Configure redrive_policy
+        Set maxReceiveCount
+
+    
+    Encryption & security   
+        Enable SSE-SQS (AWS managed key)
+        Enable KMS CMK encryption
+        Attach queue policies (IAM)
+        Restrict access by AWS account, role, or service
+
+    Access policies
+        Allow Lambda / ECS / EC2 / SNS to send or receive
+        Cross-account access
+        Condition-based policies (source ARN, VPC, IP)
+
+    
+    Redrive & replay
+        Configure redrive allow policy
+        Allow messages to be replayed from DLQ back to source queue
+
+    
+    Tags & metadata
+        Add tags (env, project, owner, cost-center)
+
+    
+    Integration resources (infra side)
+        IAM roles for producers/consumers
+        Permissions for:
+            Lambda → SQS
+            SNS → SQS
+            EventBridge → SQS
+
+
+    Terraform-specific capabilities
+        Full version-controlled queue config
+        Repeatable environments (dev/stage/prod)
+        Safe updates (diff before apply)
+        Targeted apply/destroy for queues
+        Import existing SQS into Terraform state
+
+
+    What Terraform does NOT do
+        Send messages
+        Receive messages
+        Control consumer logic
+        Message ordering logic in app
+        Retry logic inside code
+        Those are application/runtime responsibilities.
+
+
+    Real-world Terraform resources used
+        aws_sqs_queue
+        aws_sqs_queue_policy
+        aws_iam_role
+        aws_iam_policy
+        aws_kms_key (optional)
+        If you want next:
+            real industry Terraform SQS module
+            SQS + Lambda real flow diagram
