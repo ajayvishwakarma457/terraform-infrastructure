@@ -1,0 +1,33 @@
+What it is
+    AWS service to issue, manage, and auto-renew SSL/TLS certificates.
+
+
+What it’s used for
+    HTTPS for ALB, CloudFront, API Gateway, App Runner.
+
+
+Key points
+    Free for AWS-managed certs.
+    Auto-renewal handled by AWS.
+    DNS or Email validation.
+    Private keys never exposed.
+
+
+Critical limitations
+    ACM certs cannot be downloaded.
+    Regional scope:
+        CloudFront → us-east-1 only
+        ALB / API Gateway / App Runner → same region as resource
+
+
+
+Typical flow
+    Request cert (domain/subdomain).
+    Validate via DNS (recommended).
+    Attach cert to ALB/CloudFront.
+    HTTPS enabled.
+
+
+Industry best practice
+    Public certs → ACM
+    Internal/private certs → ACM Private CA or external CA
