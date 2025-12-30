@@ -31,12 +31,16 @@ resource "aws_ebs_snapshot" "this" {
     Environment = "dev"
     ManagedBy   = "terraform"
   }
+
+  lifecycle {
+   prevent_destroy = true
+  }
 }
 
 
 # detach the EBS volume
-# resource "aws_volume_attachment" "ebs_attach" {
-#   device_name = var.device_name
-#   volume_id   = aws_ebs_volume.this.id
-#   instance_id = var.instance_id
-# }
+resource "aws_volume_attachment" "ebs_attach" {
+  device_name = var.device_name
+  volume_id   = aws_ebs_volume.this.id
+  instance_id = var.instance_id
+}
