@@ -20,7 +20,7 @@ resource "aws_iam_group" "devops_group" {
   name = "${var.project_name}-devops-group"
 }
 
-# 3️⃣ IAM Policy (attach to group)
+# IAM Policy (attach to group)
 resource "aws_iam_policy" "devops_policy" {
   name        = "${var.project_name}-devops-policy"
   description = "Basic IAM policy for DevOps engineers"
