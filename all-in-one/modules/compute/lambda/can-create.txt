@@ -1,0 +1,100 @@
+
+Terraform can manage almost everything around AWS Lambda. Straight list.
+
+    Lambda function itself
+        Create / update / delete Lambda functions
+        Runtime (nodejs, python, java, etc.)
+        Handler, memory, timeout
+        Architecture (x86_64 / arm64)
+        Environment variables
+        Reserved & provisioned concurrency
+        Dead Letter Queue (DLQ)
+
+
+    Lambda code deployment
+        Zip-based deployment
+        S3-based code reference
+        Versioning
+        Aliases (dev / stage / prod)
+        Publish new versions safely
+
+
+    IAM (critical)
+        Execution role
+        Inline & managed policies
+        Permissions boundaries
+        Least-privilege IAM setup
+        Cross-account invoke permissions
+
+
+
+    Triggers / Event sources
+        API Gateway (REST / HTTP)
+        Application Load Balancer
+        EventBridge (cron & events)
+        S3 bucket notifications
+        SQS queues
+        SNS topics
+        DynamoDB Streams
+        Kinesis streams
+
+
+    Networking (VPC)
+        Attach Lambda to VPC
+        Subnets & security groups
+        Private access to RDS, Redis, etc.
+    
+
+    Logging & Monitoring
+        CloudWatch log groups
+        Log retention policies
+        CloudWatch metrics & alarms
+        X-Ray tracing enablement
+
+
+    Security
+        KMS encryption for env vars
+        Code signing config
+        Resource-based policies
+        Permission boundaries
+        Secrets via Secrets Manager / SSM
+
+
+    Scaling & performance
+        Reserved concurrency
+        Provisioned concurrency
+        Alias-based traffic shifting
+        Canary / linear deployments
+
+
+    Layers
+        Create Lambda layers
+        Version layers
+        Attach multiple layers
+        Share layers across functions/accounts
+
+
+    Deployment safety
+        Blue/Green via aliases
+        Rollbacks
+        Immutable deployments
+        Environment separation (dev/stage/prod)
+
+
+    Terraform-specific benefits
+        Repeatable infra (no console drift)
+        One-click recreate
+        State tracking
+        Dependency management
+        Multi-environment consistency
+
+
+    What Terraform does NOT do
+        Write your Lambda business logic
+        Debug runtime code issues
+        Replace CI/CD (but integrates with it)
+
+
+    Bottom line
+        Terraform handles infrastructure, permissions, wiring, scaling, security, and lifecycle.
+        Your code only handles business logic.
