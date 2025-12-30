@@ -115,3 +115,9 @@ resource "aws_ecs_service" "this" {
 
   depends_on = [aws_iam_role_policy_attachment.execution]
 }
+
+
+resource "aws_cloudwatch_log_group" "ecs" {
+  name              = "/ecs/${var.service_name}"
+  retention_in_days = 14
+}
