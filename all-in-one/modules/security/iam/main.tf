@@ -242,7 +242,8 @@ resource "aws_iam_policy" "ecs_execution_secrets" {
     Statement = [{
       Effect = "Allow"
       Action = [
-        "secretsmanager:GetSecretValue"
+        "secretsmanager:GetSecretValue",
+        "kms:Decrypt"
       ]
       Resource = var.secret_arn
     }]

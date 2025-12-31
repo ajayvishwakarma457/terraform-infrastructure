@@ -26,7 +26,6 @@ Service Layer
     Placement strategy & constraints
 
 
-
 Compute
     Fargate profiles
     EC2 launch templates
