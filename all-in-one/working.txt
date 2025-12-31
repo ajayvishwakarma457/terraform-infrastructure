@@ -2,7 +2,7 @@ terraform destroy -target=module.vpc
 terraform apply -target=module.ec2
 
 
-in api gateway services we have so manythings to do?
+in "waf and shield"  we have so many things to do?
 but what terraform can do list me out that things
 
 # command     = ["CMD-SHELL", "curl -f http://localhost:3000/ || exit 1"]
