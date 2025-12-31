@@ -21,8 +21,6 @@ module "iam" {
   secret_arn = module.secret_ecs.secret_arn # for ecs module
 }
 
-
-
 module "acm" {
   source                    = "./modules/security/acm"
   domain_name               = var.domain_name
@@ -431,7 +429,6 @@ module "kms" {
   }
 }
 
-
 module "ecr" {
   source = "./modules/containers/ecr"
   repository_name = "my-app"
@@ -454,7 +451,6 @@ module "app_runner" {
   apprunner_ecr_access_role_arn    = module.iam.apprunner_ecr_access_role_arn
   image_tag                        = "v4"
 }
-
 
 module "secret_ecs" {
   source = "./modules/security/secret"
@@ -496,4 +492,18 @@ module "ecs" {
   ecs_execution_policy_attached_id = module.iam.ecs_execution_policy_attached_id
 
   desired_count = 1
+}
+
+module "orders_queue" {
+  source = "./modules/application-integration/simple-queue-service"
+  name  = "orders-queue"
+  fifo  = false
+
+  visibility_timeout_seconds = 60
+  enable_dlq = true
+
+  tags = {
+    env     = "prod"
+    service = "orders"
+  }
 }

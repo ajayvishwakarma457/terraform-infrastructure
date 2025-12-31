@@ -36,25 +36,3 @@ resource "aws_sqs_queue_policy" "this" {
   policy    = var.queue_policy
 }
 
-
-
-
-
-
-
-
-## to call in the root module
-# module "orders_queue" {
-#   source = "./modules/sqs"
-
-#   name  = "orders-queue"
-#   fifo  = false
-
-#   visibility_timeout_seconds = 60
-#   enable_dlq = true
-
-#   tags = {
-#     env     = "prod"
-#     service = "orders"
-#   }
-# }
