@@ -17,20 +17,18 @@ Task & Container
     Execution role & task role (IAM)
 
 
-
 Service Layer
     ECS Service
     Desired count
-    Deployment strategy (rolling / blue-green)
+    Deployment strategy (rolling / blue-green) (pending)
     Auto-healing
-    Placement strategy & constraints
+    Placement strategy & constraints (only use when using EC2 not with farget)
 
 
-Compute
+Compute (not in used)
     Fargate profiles
     EC2 launch templates
     Auto Scaling Groups (for ECS on EC2)
-
 
 
 Networking
@@ -40,19 +38,17 @@ Networking
     Public / private networking
 
 
-
-Load Balancing
+Load Balancing (pending)
     Application Load Balancer
     Target groups
     Listener rules
     Service ↔ target group attachment
 
 
-
 Auto Scaling
     Service auto scaling
     CPU / memory based scaling
-    Custom CloudWatch metrics
+    Custom CloudWatch metrics (pending)
 
 
 Images & Registry
@@ -61,7 +57,7 @@ Images & Registry
     Repo permissions
 
 
-Observability
+Observability (pending)
     Amazon CloudWatch logs
     Log groups
     Metrics & alarms
