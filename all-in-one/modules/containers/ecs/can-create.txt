@@ -63,7 +63,7 @@ Observability (pending)
     Metrics & alarms
 
 
-Security
+Security (pending)
     IAM roles & policies
     Secrets injection
     Task-level permissions
