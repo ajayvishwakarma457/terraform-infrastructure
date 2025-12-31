@@ -6,27 +6,46 @@ in "waf and shield"  we have so many things to do?
 but what terraform can do list me out that things
 
 
+1. Desired count
+     PARTIALLY DONE
+          You set desired_count = 1
+          Pending improvement:
+          No dynamic control yet (manual only).
+          Not connected to auto scaling policies.
 
 
-3) Deployment strategy (rolling / blue-green)
-     You are currently on default rolling
-     No explicit:
-          deployment_controller
-          deployment_configuration
-          Blue/Green (CodeDeploy) setup
+2. Deployment strategy (rolling / blue-green)
+     PARTIALLY DONE
+     Current state:
+          Default rolling deployment
+          You set:
+               deployment_minimum_healthy_percent
+               deployment_maximum_percent
+     Pending:
+          No Blue/Green (CodeDeploy) setup
+          No traffic shifting strategy
 
 
-4) Auto-healing
-     No explicit health checks tied to:
-          ALB target group (preferred)
-          or container health check          
-     ECS is restarting tasks, but no defined health model
+
+3. Auto-healing
+
+     PARTIALLY DONE
+     What you have:
+          Container healthCheck → ✅
+          ECS restarts failed tasks → ✅
+     Pending (important):
+          No ALB health check (you already said ALB not used)
+          No service auto scaling based on metrics
 
 
-5) Placement strategy & constraints
-     No:
-          placement strategy
-          placement constraints
+4. Placement strategy & constraints
+     NOT DONE
+     Missing:
+          placement_strategy
+          placement_constraints
+     Even on Fargate, industry setups usually define at least:
+          spread across AZs
+          capacity provider weighting
 
 
 
