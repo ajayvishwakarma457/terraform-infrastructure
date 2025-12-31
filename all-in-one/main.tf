@@ -493,6 +493,7 @@ module "ecs" {
   execution_role_arn = module.iam.ecs_execution_role_arn
   task_role_arn      = module.iam.ecs_task_role_arn
   secret_arn = module.secret_ecs.secret_arn
+  ecs_execution_policy_attached_id = module.iam.ecs_execution_policy_attached_id
 
   desired_count = 1
 }

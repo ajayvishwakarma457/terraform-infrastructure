@@ -56,4 +56,9 @@ variable "task_role_arn" {
   description = "ECS task role ARN"
 }
 
+variable "ecs_execution_policy_attached_id" {
+  type = string
+  description = "ECS execution policy attachment ID"
+}
+
 
