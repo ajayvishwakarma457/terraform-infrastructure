@@ -16,26 +16,6 @@ resource "aws_cloudwatch_log_group" "this" {
     ignore_changes = [name]
   }
 }
-
-# IAM role for ECS task execution (pull image, write logs)
-# resource "aws_iam_role" "execution" {
-#   name = "${var.service_name}-execution-role"
-
-#   assume_role_policy = jsonencode({
-#     Version = "2012-10-17"
-#     Statement = [{
-#       Effect    = "Allow"
-#       Principal = { Service = "ecs-tasks.amazonaws.com" }
-#       Action    = "sts:AssumeRole"
-#     }]
-#   })
-# }
-
-# resource "aws_iam_role_policy_attachment" "execution" {
-#   role       = aws_iam_role.execution.name
-#   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-# }
-
 # Task definition
 resource "aws_ecs_task_definition" "this" {
   family                   = var.service_name
@@ -43,9 +23,6 @@ resource "aws_ecs_task_definition" "this" {
   network_mode             = "awsvpc"
   cpu                      = var.cpu
   memory                   = var.memory
-
-  # execution_role_arn       = aws_iam_role.execution.arn
-  # task_role_arn            = aws_iam_role.execution.arn
 
   execution_role_arn       = var.execution_role_arn
   task_role_arn            = var.task_role_arn
@@ -64,13 +41,12 @@ resource "aws_ecs_task_definition" "this" {
         protocol      = "tcp"
       }]
 
-      #  secrets = [
-      #   {
-      #     name      = "DB_PASSWORD"
-      #     # valueFrom = "${var.secret_arn}:password::"
-      #     valueFrom = "${var.secret_arn}"
-      #   }
-      # ]
+       secrets = [
+        {
+          name      = "DB_PASSWORD"
+          valueFrom = "${var.secret_arn}:DB_PASSWORD::"
+        }
+      ]
 
       logConfiguration = {
         logDriver = "awslogs"

@@ -234,3 +234,23 @@ resource "aws_iam_role_policy_attachment" "ecs_execution_policy_attach" {
 }
 
 
+resource "aws_iam_policy" "ecs_execution_secrets" {
+  name = "ecs-execution-secrets-access"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Action = [
+        "secretsmanager:GetSecretValue"
+      ]
+      Resource = var.secret_arn
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_execution_secrets_attach" {
+  role       = aws_iam_role.ecs_execution_role.name
+  policy_arn = aws_iam_policy.ecs_execution_secrets.arn
+}
+

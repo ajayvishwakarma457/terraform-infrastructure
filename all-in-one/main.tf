@@ -458,7 +458,7 @@ module "app_runner" {
 
 module "secret_ecs" {
   source = "./modules/security/secret"
-  name        = "tanvora/ecs/app"
+  name        = "tanvora/ecs/app-v2"
   description = "Secrets for ECS Node application"
 
   # for ecs
