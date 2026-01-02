@@ -33,3 +33,6 @@ output "ecs_execution_policy_attached_id" {
   value = aws_iam_role_policy_attachment.ecs_execution_policy_attach.id
 }
 
+output "sqs_access_role_arn" {
+  value = aws_iam_role.sqs_access_role.arn
+}

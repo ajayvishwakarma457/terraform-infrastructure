@@ -1,3 +1,4 @@
+
 resource "aws_sqs_queue" "this" {
   name                      = var.fifo ? "${var.name}.fifo" : var.name
   fifo_queue                = var.fifo
@@ -31,8 +32,30 @@ resource "aws_sqs_queue" "dlq" {
 }
 
 resource "aws_sqs_queue_policy" "this" {
-  count     = length(var.queue_policy) > 0 ? 1 : 0
+  # count     = length(var.queue_policy) > 0 ? 1 : 0
   queue_url = aws_sqs_queue.this.id
-  policy    = var.queue_policy
+  # policy    = var.queue_policy
+  policy    = data.aws_iam_policy_document.queue_policy.json
 }
 
+data "aws_iam_policy_document" "queue_policy" {
+  statement {
+    sid    = "AllowConsumerAccess"
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = [var.consumer_role_arn]
+    }
+
+    actions = [
+      "sqs:SendMessage",
+      "sqs:ReceiveMessage",
+      "sqs:DeleteMessage",
+      "sqs:GetQueueAttributes",
+      "sqs:GetQueueUrl"
+    ]
+
+    resources = [aws_sqs_queue.this.arn]
+  }
+}

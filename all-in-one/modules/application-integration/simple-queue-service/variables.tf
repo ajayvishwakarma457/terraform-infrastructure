@@ -69,3 +69,8 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "consumer_role_arn" {
+  type        = string
+  description = "IAM role allowed to access this SQS queue"
+}

@@ -18,7 +18,8 @@ module "iam" {
   db_resource_id = var.db_resource_id
   aws_region     = var.aws_region
   # secret_arn = module.secret.secret_arn
-  secret_arn = module.secret_ecs.secret_arn # for ecs module
+  secret_arn = module.secret_ecs.secret_arn # for ecs module 
+  sqs_queue_arn = module.orders_queue.queue_arn
 }
 
 module "acm" {
@@ -499,6 +500,7 @@ module "orders_queue" {
   name  = "orders-queue"
   fifo  = false
 
+  consumer_role_arn = module.iam.sqs_access_role_arn
   visibility_timeout_seconds = 60
   enable_dlq = true
 

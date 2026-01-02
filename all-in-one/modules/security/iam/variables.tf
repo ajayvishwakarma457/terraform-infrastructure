@@ -20,3 +20,9 @@ variable "secret_arn" {
   type        = string
   description = "Secrets Manager ARN for ECS task role"
 }
+
+
+variable "sqs_queue_arn" {
+  type = string
+  description = "SQS Queue ARN for SQS access role"
+}

@@ -255,3 +255,43 @@ resource "aws_iam_role_policy_attachment" "ecs_execution_secrets_attach" {
   policy_arn = aws_iam_policy.ecs_execution_secrets.arn
 }
 
+resource "aws_iam_role" "sqs_access_role" {
+  # name = "${var.project_name}-lambda-sqs-role"
+  # name = "${var.project_name}-ecs-sqs-role"
+  name = "${var.project_name}-sqs-access-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Principal = {
+        Service = "lambda.amazonaws.com"
+      }
+      Action = "sts:AssumeRole"
+    }]
+  })
+}
+
+resource "aws_iam_policy" "sqs_access" {
+  name = "orders-sqs-access"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Action = [
+        "sqs:SendMessage",
+        "sqs:ReceiveMessage",
+        "sqs:DeleteMessage",
+        "sqs:GetQueueAttributes",
+        "sqs:GetQueueUrl"
+      ]
+      Resource = var.sqs_queue_arn
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "sqs_access" {
+  role       = aws_iam_role.sqs_access_role.name
+  policy_arn = aws_iam_policy.sqs_access.arn
+}
