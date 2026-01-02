@@ -505,7 +505,10 @@ module "orders_queue" {
   enable_dlq = true
 
   tags = {
-    env     = "prod"
-    service = "orders"
+    env         = "prod"
+    service     = "orders"
+    project     = "tanvora"
+    owner       = "ajay.vishwakarma"
+    cost-center = "cc-orders-001"
   }
 }
