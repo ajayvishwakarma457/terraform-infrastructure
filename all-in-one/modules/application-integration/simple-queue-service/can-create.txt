@@ -29,7 +29,7 @@ Amazon SQS — what Terraform can manage (straight list)
 
     Access policies
         Allow Lambda / ECS / EC2 / SNS to send or receive
-        Cross-account access
+        Cross-account access 
         Condition-based policies (source ARN, VPC, IP)
 
     

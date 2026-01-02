@@ -31,6 +31,17 @@ resource "aws_sqs_queue" "dlq" {
   tags = var.tags
 }
 
+resource "aws_sqs_queue_redrive_allow_policy" "dlq" {
+  count = var.enable_dlq ? 1 : 0
+
+  queue_url = aws_sqs_queue.dlq[0].id
+
+  redrive_allow_policy = jsonencode({
+    redrivePermission = "byQueue"
+    sourceQueueArns   = [aws_sqs_queue.this.arn]
+  })
+}
+
 resource "aws_sqs_queue_policy" "this" {
   # count     = length(var.queue_policy) > 0 ? 1 : 0
   queue_url = aws_sqs_queue.this.id
