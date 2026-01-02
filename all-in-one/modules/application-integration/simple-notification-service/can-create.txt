@@ -20,7 +20,7 @@ Below is exactly what Terraform can manage in AWS SNS (industry-standard scope).
             Email / Email-JSON
             SMS
             HTTP / HTTPS
-            SQS
+            SQS (this is industry standard)
             Lambda
             Application (mobile push)
 
