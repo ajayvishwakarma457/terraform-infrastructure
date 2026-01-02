@@ -512,3 +512,32 @@ module "orders_queue" {
     cost-center = "cc-orders-001"
   }
 }
+
+
+module "sns_kms" {
+  source = "./modules/security/kms"
+
+  alias_name = "alias/sns"
+  tags = {
+    Project     = var.project_name
+    Environment = var.environment
+    ManagedBy   = "terraform"
+  }
+}
+
+module "sns" {
+  source = "./modules/application-integration/simple-notification-service"
+
+  # name         = "order-events"
+  name = "order-events.fifo"
+  display_name = "order-events"
+  fifo_topic   = true
+  content_based_deduplication = true
+  kms_key_id = module.sns_kms.kms_key_arn   # ✅ PASS VALUE
+  # email_subscriptions = ["ajay@spakcomm.com"]
+
+  tags = {
+    Environment = "prod"
+    Project     = "payments"
+  }
+}
