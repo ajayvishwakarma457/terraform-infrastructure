@@ -541,3 +541,28 @@ module "sns" {
     Project     = "payments"
   }
 }
+
+
+module "lambda" {
+  source = "./modules/compute/lambda"
+
+  function_name = "sample-lambda"
+  runtime       = "nodejs18.x"
+  handler       = "index.handler"
+  filename      = "${path.root}/lambda.zip"
+  role_name     = "sample-lambda-role"
+
+  memory_size = 256
+  timeout     = 10
+  architecture = "arm64"
+
+  environment_variables = {
+    ENV = "prod"
+  }
+
+  provisioned_concurrency = 2
+
+  tags = {
+    Project = "demo"
+  }
+}

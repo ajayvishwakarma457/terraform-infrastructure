@@ -6,15 +6,30 @@ In "waf and shield"  we have so many things to do?
 but what terraform can do list me out that things
 
 
-Task-level permissions status Review / tighten
-Security groups Needs final architecture decision
+Senior Software Engineer | 9 yrs | Backend, Cloud (AWS) | Building & breaking systems
+
+software engineering
+aws
+react native
+react js
 
 
 
+Senior software engineer with 9+ years of experience building web and mobile applications.
 
+Core expertise:
+• Frontend: React, React Native
+• Backend: Node.js, REST APIs
+• Cloud & Infra: AWS, Terraform
+• Databases: MongoDB
+• Monitoring & Observability: Grafana, Loki
 
+I focus on building scalable, production-ready systems with strong performance, reliability, and cost efficiency, backed by proper monitoring and logging.
 
-
+Open to:
+• Senior Full-Stack / Backend roles
+• Product-focused teams
+• Consulting or freelance work
 
 
 
